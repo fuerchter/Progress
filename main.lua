@@ -1,4 +1,5 @@
 require "entities/Character"
+require "entities/Checkpoint"
 require "Polygon"
 require "Points"
 --require "Level"
@@ -6,6 +7,7 @@ require "Points"
 local world
 local character
 local polygon
+local checkpoint
 
 function love.load()
 	love.graphics.setMode(800, 600, false, false, 0)
@@ -21,6 +23,8 @@ function love.load()
 	points:insert({x=200, y=0})
 	points:insert({x=100, y=100})
 	polygon = Polygon(world, {x=200, y=400}, {r=255, g=255, b=255}, 0.2, points)
+	
+	checkpoint=Checkpoint(world, {x=200, y=350}, {r=255, g=255, b=255}, 32)
 
 	--level=Level("test")
 end
@@ -33,8 +37,10 @@ end
 
 function love.draw()
 	polygon:draw()
+	checkpoint:draw()
 	character:draw()
 	character:drawFoot()
+	
 end
 
 function beginContact(a, b, coll)
@@ -42,6 +48,12 @@ function beginContact(a, b, coll)
 	or (a:getUserData()~="character" and b:getUserData()=="foot"))
 	then
 		character.groundCollisions=character.groundCollisions+1
+	end
+	
+	if((a:getUserData()=="character" and  b:getUserData()=="checkpoint") --character and checkpoint are colliding
+	or (a:getUserData()=="checkpoint" and  b:getUserData()=="character"))
+	then
+		character.color={r=50, g=50, b=50, a=255}
 	end
 end
 

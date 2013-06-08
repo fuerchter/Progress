@@ -18,6 +18,7 @@ function Polygon.new(world, position, color, friction, points)
 	self.fixture:setFriction(friction)
 	self.color=color
 	
+	self.light=true
 	return self
 end
 

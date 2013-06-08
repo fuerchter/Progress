@@ -37,7 +37,10 @@ function Character:_init(world, position, color, friction, radius)
 	self.airTime=0 --how long we are currently in the air already
 	self.canJump=true
 	
+	self.segments=20
 	self.color=color
+	self.light=true
+	return self
 end
 
 function Character.update(self, dt)
@@ -74,7 +77,6 @@ function Character.update(self, dt)
 end
 
 function Character.draw(self)
-	local segments=20
 	local x, y=self.fixture:getBody():getPosition()
 	love.graphics.setColor(self.color.r, self.color.g, self.color.b, self.color.a)
 	love.graphics.circle("fill", x, y, self.fixture:getShape():getRadius(), segments)

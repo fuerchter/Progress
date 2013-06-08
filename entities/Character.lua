@@ -14,7 +14,7 @@ setmetatable(Character, {
 
 --color will be boolean and loaded from config/level
 --color expects {r=rval, g=gval, b=bval, a=aval} (currently), points expects object of type Points
-function Character:_init(level, position, color, friction, radius)
+function Character:_init(level, position, light, friction, radius)
 	Entity._init(self, level, "Character", position)
 	
 	local body=love.physics.newBody(level.world, position.x, position.y, "dynamic")
@@ -34,8 +34,10 @@ function Character:_init(level, position, color, friction, radius)
 	
 	self.speed=0.5
 	self.segments=20
-	self.color=color	
-	self.light=true
+	
+	self.level=level
+	self:setLight(false)
+	
 	self.collected=0
 	self.charge=0
 	return self
@@ -72,6 +74,19 @@ function Character:update(dt)
 	--[[local velX, velY=self.fixture:getBody():getLinearVelocity()
 	local posX, posY=self.fixture:getBody():getPosition()	
 	love.graphics.setCaption("Velocity: " .. math.floor(velX) .. " " .. math.floor(velY) .. " Position: " .. math.floor(posX) .. " " .. math.floor(posY))]]
+end
+
+function Character:setLight(light)
+	self.light=light
+	if(light)
+	then
+		self.fixture:setMask(2)
+		self.color=self.level:getColorForType("light")
+	else
+		self.fixture:setMask(1)
+		self.color=self.level:getColorForType("dark")
+	end
+	--self.fixture:setMask(3)
 end
 
 function Character:draw()

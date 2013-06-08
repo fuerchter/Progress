@@ -78,7 +78,8 @@ function Level.new(name)
 	
 	--extract map
 	self.spawn = { x = xml.level.map["@spawnX"], y = xml.level.map["@spawnY"]}
-	self.character = Character(self, self.spawn, self.colorScheme["light"], 0.2, 32)
+	
+	self.character = Character(self, self.spawn, true, 0.2, 32)
 	
 	self.map = Map()
 
@@ -94,7 +95,12 @@ function Level.new(name)
 				points.insert(points, { x = vertex["@x"], y = vertex["@y"]})
 			end
 			
-			self.map:registerPlatform(self, { x = polygon["@x"], y = polygon["@y"]}, points, self.colorScheme[polygon["@type"]])
+			if(polygon["@type"]=="light")
+			then
+				self.map:registerPlatform(self, { x = polygon["@x"], y = polygon["@y"]}, points, true)
+			else
+				self.map:registerPlatform(self, { x = polygon["@x"], y = polygon["@y"]}, points, false)
+			end
 		
 		elseif xml.level.map:children()[poly]:name() == "text" then
 			-- waiting for implementation of class

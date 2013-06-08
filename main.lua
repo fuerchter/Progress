@@ -20,6 +20,11 @@ end
 
 function love.update(dt)
 	level:update(dt)
+	--love.graphics.setCaption(tostring(level.character.light))
+	x11, x12=level.map.platforms[1].fixture:getMask()
+	x21, x22=level.map.platforms[2].fixture:getMask()
+	x31, x32=level.character.fixture:getMask()
+	love.graphics.setCaption(x11 .. " " .. x12 .. " " .. x21 .. " " .. x22 .. " " .. x31 .. " " .. x32)
 end
 
 function love.draw()
@@ -32,8 +37,9 @@ function beginContact(a, b, coll)
 		if((a:getUserData().type=="Character" and  b:getUserData().type=="Checkpoint") --character and checkpoint are colliding
 		or (a:getUserData().type=="Checkpoint" and  b:getUserData().type=="Character"))
 		then
-			level.character.light=false
-			level.character.color={r=50, g=50, b=50, a=255}
+			--[[level.character.light=false
+			level.character.color={r=50, g=50, b=50, a=255}]]
+			level.character:setLight(false)
 			
 			--TODO: destroy checkpoint (optional)
 		end

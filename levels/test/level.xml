@@ -8,22 +8,26 @@
 	<config>
 		<music file="test.mp3" />
 		<colorscheme>
-			<colorLight r="255" g="0" b="0" a="255" />
-			<colorDark r="0" g="255" b="0" a="255" />
+			<colorLight r="0" g="255" b="0" a="255" />
+			<colorDark r="255" g="0" b="0" a="255" />
 			<colorBack r="0" g="0" b="255" a="255" />
 		</colorscheme>
 	</config>
 	
 	<entities>
-		<entity type="checkpoint" x="500" y="350" />
-		<entity type="collectable" x="200" y="350" />
-		<entity type="enemy" x="200" y="350" />
+		<entity type="collectable" x="500" y="350" />
+		<entity type="checkpoint" x="100" y="350" />
 	</entities>
 	
 	<map spawnX="300" spawnY="0">
 		<polygon type="dark" x="200" y="400" >
 			<vertex x="0" y="0" />
-			<vertex x="500" y="0" />
+			<vertex x="200" y="0" />
+			<vertex x="100" y="100" />
+		</polygon>
+		<polygon type="light" x="50" y="500" >
+			<vertex x="0" y="0" />
+			<vertex x="200" y="0" />
 			<vertex x="100" y="100" />
 		</polygon>
 	</map>

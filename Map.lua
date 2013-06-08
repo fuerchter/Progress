@@ -18,8 +18,8 @@ function Map.new()
 end
 
 --register new platform
-function Map:registerPlatform(level, position, points, color)
-	self.platforms[#self.platforms+1] = Polygon.new(level, position, color, 0.2, points)
+function Map:registerPlatform(level, position, points, light)
+	self.platforms[#self.platforms+1] = Polygon.new(level, position, light, 0.2, points)
 end
 
 --register new text

@@ -36,7 +36,7 @@ function Character:_init(level, position, light, friction, radius)
 	self.segments=20
 	
 	self.level=level
-	self:setLight(false)
+	self:setLight(true)
 	
 	self.collected=0
 	self.charge=0
@@ -80,10 +80,13 @@ function Character:setLight(light)
 	self.light=light
 	if(light)
 	then
-		self.fixture:setMask(2)
+		-- setFilterData(x,y,z)
+		-- first it is checked wether the two z values of colliding bodies are the same, if true - they collide (used for the platforms)
+		-- if the z values are different, it is checked wether object1's x is the same as object2's y and the same in the opposite direction, if true - they collide (used for the checkpoint)
+		self.fixture:setFilterData(1, 1, 1)
 		self.color=self.level:getColorForType("light")
 	else
-		self.fixture:setMask(1)
+		self.fixture:setFilterData(1, 1, 2)
 		self.color=self.level:getColorForType("dark")
 	end
 	--self.fixture:setMask(3)

@@ -20,11 +20,6 @@ end
 
 function love.update(dt)
 	level:update(dt)
-	--love.graphics.setCaption(tostring(level.character.light))
-	x11, x12=level.map.platforms[1].fixture:getMask()
-	x21, x22=level.map.platforms[2].fixture:getMask()
-	x31, x32=level.character.fixture:getMask()
-	love.graphics.setCaption(x11 .. " " .. x12 .. " " .. x21 .. " " .. x22 .. " " .. x31 .. " " .. x32)
 end
 
 function love.draw()

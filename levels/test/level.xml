@@ -16,7 +16,7 @@
 	
 	<entities>
 		<entity type="collectable" x="500" y="350" />
-		<entity type="checkpoint" x="100" y="350" />
+		<entity type="checkpoint" x="400" y="350" />
 	</entities>
 	
 	<map spawnX="300" spawnY="0">
@@ -26,7 +26,7 @@
 			<vertex x="200" y="0" />
 			<vertex x="100" y="100" />
 		</polygon>
-		<polygon type="light" x="50" y="500" >
+		<polygon type="light" x="400" y="400" >
 			<vertex x="0" y="0" />
 			<vertex x="200" y="0" />
 			<vertex x="100" y="100" />

@@ -21,6 +21,7 @@ function Checkpoint:_init(level, position, radius)
 	self.fixture=love.physics.newFixture(body, shape, 1)
 	self.fixture:setSensor(true)
 	self.fixture:setUserData(self)
+	self.fixture:setFilterData(1, 1, 0)
 	
 	self.segments=20
 	

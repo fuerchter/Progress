@@ -2,11 +2,11 @@ Entity = {}
 Entity.__index = Entity
 
 setmetatable(Entity, {
-  __call = function (cls, ...)
-    local self = setmetatable({}, cls)
-    self:_init(...)
-    return self
-  end,
+	__call = function (cls, ...)
+				local self = setmetatable({}, cls)
+				self:_init(...)
+				return self
+			end,
 })
 
 --creates an entity

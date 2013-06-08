@@ -4,12 +4,12 @@ Character = {}
 Character.__index = Character
 
 setmetatable(Character, {
-  __index = Entity,
-  __call = function (cls, ...)
-    local self = setmetatable({}, cls)
-    self:_init(...)
-    return self
-  end,
+	__index = Entity,
+	__call = function (cls, ...)
+				local self = setmetatable({}, cls)
+				self:_init(...)
+				return self
+			end,
 })
 
 --color will be boolean and loaded from config/level
@@ -38,7 +38,6 @@ function Character:_init(world, position, color, friction, radius)
 	self.canJump=true
 	
 	self.color=color
-	return self
 end
 
 function Character.update(self, dt)

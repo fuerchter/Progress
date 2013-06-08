@@ -103,7 +103,9 @@ function Level.new(name)
 			end
 		
 		elseif xml.level.map:children()[poly]:name() == "text" then
-			-- waiting for implementation of class
+			local text = xml.level.map:children()[poly]
+			
+			self.map:registerText({ x = text["@x"], y = text["@y"]}, text:value())
 		end
 	end
 	

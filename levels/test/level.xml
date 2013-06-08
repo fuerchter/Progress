@@ -20,6 +20,7 @@
 	</entities>
 	
 	<map spawnX="300" spawnY="0">
+		<text x="100" y="100">Testing Text</text>
 		<polygon type="dark" x="200" y="400" >
 			<vertex x="0" y="0" />
 			<vertex x="200" y="0" />

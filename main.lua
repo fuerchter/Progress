@@ -21,31 +21,20 @@ function love.load()
 	world:setCallbacks(beginContact, endContact, preSolve, postSolve)
 	
 	character = Character(world, {x=300, y=000}, {r=100, g=100, b=255}, 0.2, 32)
-	points = Points.new()
-	points:insert({x=0, y=0})
-	points:insert({x=200, y=0})
-	points:insert({x=100, y=100})
-	polygon = Polygon(world, {x=200, y=400}, {r=255, g=255, b=255}, 0.2, points)
-	
-	--checkpoint=Checkpoint(world, {x=200, y=350}, 32)
-	collectable=Collectable(world, {x=200, y=350}, 32)
-
 
 	level=Level(world, "test")
 end
 
 function love.update(dt)
-	world:update(dt)
-	
 	character:update(dt)
+	world:update(dt)
+	level:update(dt)
 end
 
 function love.draw()
-	polygon:draw()
-	--checkpoint:draw()
-	collectable:draw()
 	character:draw()
 	character:drawFoot()
+	level:draw()
 	
 	love.graphics.setCaption(character.collected)	
 end

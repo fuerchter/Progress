@@ -61,11 +61,11 @@ function Level.new(world, name)
 		if entity["@type"] == "checkpoint" then 
 			self.entities[index] = Checkpoint(world, { x = entity["@x"], y = entity["@y"]}, 32)
 		elseif entity["@type"] == "battery" then
-			-- waiting for implementation of class
+			self.entities[index] = Checkpoint(world, { x = entity["@x"], y = entity["@y"]}, 32)
 		elseif entity["@type"] == "enemy" then
 			-- waiting for implementation of class
 		elseif entity["@type"] == "collectable" then
-			-- waiting for implementation of class
+			self.entities[index] = Collectable(world, { x = entity["@x"], y = entity["@y"]}, 32)
 		end
 		
     end
@@ -76,9 +76,9 @@ function Level.new(world, name)
 
 	for poly = 1, #xml.level.map:children() do
 	
-		if xml.level.entities:children()[poly]:name() == "polygon" then
+		if xml.level.map:children()[poly]:name() == "polygon" then
 	
-			local polygon = xml.level.entities:children()[poly]
+			local polygon = xml.level.map:children()[poly]
 			local points = Points()
 			
 			for vert = 1, #polygon:children() do
@@ -88,10 +88,26 @@ function Level.new(world, name)
 			
 			self.map:registerPlatform(world, { x = polygon["@x"], y = polygon["@y"]}, points, self.colorScheme[polygon["@type"]])
 		
-		elseif xml.level.entities:children()[poly]:name() == "text" then
+		elseif xml.level.map:children()[poly]:name() == "text" then
 			-- waiting for implementation of class
 		end
 	end
 	
 	return self
+end
+
+function Level:update(dt)
+	for ent = 1, #self.entities do
+		self.entities[ent]:update(dt)
+	end
+end
+
+function Level:draw()
+	--first draw map
+	self.map:draw()
+	
+	--now draw entities
+	for ent = 1, #self.entities do
+		self.entities[ent]:draw()
+	end
 end

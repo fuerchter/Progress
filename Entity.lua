@@ -14,3 +14,12 @@ function Entity:_init(entType, position)
   self.type = entType
   self.position = position
 end
+
+--functions that every entity need
+function Entity:update(dt)
+	
+end
+
+function Entity:draw()
+	
+end

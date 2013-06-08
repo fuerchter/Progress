@@ -1,12 +1,12 @@
 Points = {}
 Points.__index = Points
 
---color will be boolean and loaded from config/level
 function Points.new()
 	local self=setmetatable({}, Points)
 	return self
 end
 
+--expects a point to be the following: {x=xval, y=yval}
 function Points.insert(self, point)
 	table.insert(self, point)
 end

@@ -2,6 +2,7 @@ Character = {}
 Character.__index = Character
 
 --color will be boolean and loaded from config/level
+--color expects {r=rval, g=gval, b=bval, a=aval} (currently), points expects object of type Points
 function Character.new(world, position, color, friction, radius)
 	local self=setmetatable({}, Character)
 	
@@ -26,7 +27,7 @@ function Character.update(self, dt)
 	
 	local velX, velY=self.fixture:getBody():getLinearVelocity()
 	local posX, posY=self.fixture:getBody():getPosition()
-	--love.graphics.setCaption("Velocity: " .. math.floor(velX) .. " " .. math.floor(velY) .. " Position: " .. math.floor(posX) .. " " .. math.floor(posY) .. " " .. self.fixture:getBody():getMass() .. " " .. self.fixture:getFriction())
+	love.graphics.setCaption("Velocity: " .. math.floor(velX) .. " " .. math.floor(velY) .. " Position: " .. math.floor(posX) .. " " .. math.floor(posY))
 end
 
 function Character.draw(self)

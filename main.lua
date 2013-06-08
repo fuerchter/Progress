@@ -13,6 +13,7 @@ function love.load()
 	love.physics.setMeter(64)
 	world=love.physics.newWorld(0, 9.81*64, true)
 	world:setAllowSleeping(false)
+	world:setCallbacks(beginContact, endContact, preSolve, postSolve)
 	
 	character=Character(world, {x=300, y=000}, {r=100, g=100, b=255}, 0.2, 32)
 	points=Points.new()
@@ -31,6 +32,23 @@ function love.update(dt)
 end
 
 function love.draw()
-	character:draw()
 	polygon:draw()
+	character:draw()
+	character:drawFoot()
+end
+
+function beginContact(a, b, coll)
+	if((a:getUserData()=="foot" and b:getUserData()~="character") --if foot is colliding but not with character
+	or (a:getUserData()~="character" and b:getUserData()=="foot"))
+	then
+		character.groundCollisions=character.groundCollisions+1
+	end
+end
+
+function endContact(a, b, coll)
+	if((a:getUserData()=="foot" and b:getUserData()~="character")
+	or (a:getUserData()~="character" and b:getUserData()=="foot"))
+	then
+		character.groundCollisions=character.groundCollisions-1
+	end
 end

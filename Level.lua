@@ -97,7 +97,9 @@ function Level.new(name)
 			self.map:registerPlatform(self, { x = polygon["@x"], y = polygon["@y"]}, points, self.colorScheme[polygon["@type"]])
 		
 		elseif xml.level.map:children()[poly]:name() == "text" then
-			-- waiting for implementation of class
+			local text = xml.level.map:children()[poly]
+			
+			self.map:registerText({ x = text["@x"], y = text["@y"]}, text:value())
 		end
 	end
 	

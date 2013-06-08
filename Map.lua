@@ -1,3 +1,6 @@
+require "Polygon"
+require "Text"
+
 Map = {}
 Map.__index = Map
 
@@ -19,12 +22,12 @@ end
 
 --register new platform
 function Map:registerPlatform(level, position, points, color)
-	self.platforms[#self.platforms+1] = Polygon.new(level, position, color, 0.2, points)
+	self.platforms[#self.platforms+1] = Polygon(level, position, color, 0.2, points)
 end
 
 --register new text
-function Map:registerText()
-	
+function Map:registerText(position, text)
+	self.texts[#self.texts+1] = Text(position, text)
 end
 
 function Map:draw()

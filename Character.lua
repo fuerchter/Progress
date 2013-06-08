@@ -26,7 +26,7 @@ function Character.update(self, dt)
 	
 	local velX, velY=self.fixture:getBody():getLinearVelocity()
 	local posX, posY=self.fixture:getBody():getPosition()
-	love.graphics.setCaption("Velocity: " .. math.floor(velX) .. " " .. math.floor(velY) .. " Position: " .. math.floor(posX) .. " " .. math.floor(posY) .. " " .. self.fixture:getBody():getMass() .. " " .. self.fixture:getFriction())
+	--love.graphics.setCaption("Velocity: " .. math.floor(velX) .. " " .. math.floor(velY) .. " Position: " .. math.floor(posX) .. " " .. math.floor(posY) .. " " .. self.fixture:getBody():getMass() .. " " .. self.fixture:getFriction())
 end
 
 function Character.draw(self)

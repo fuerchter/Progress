@@ -12,11 +12,11 @@ setmetatable(Enemy, {
   end,
 })
 
-function Enemy:_init(world, position, friction, radius)
-	Entity._init(self, "Enemy", position)
+function Enemy:_init(level, position, friction, radius)
+	Entity._init(self, level, "Enemy", position)
 	
 	--color should automatically be lightcolor
-	local body=love.physics.newBody(world, position.x, position.y, "dynamic")
+	local body=love.physics.newBody(level.world, position.x, position.y, "dynamic")
 	local shape=love.physics.newCircleShape(radius)
 	self.fixture=love.physics.newFixture(body, shape, 1) --density?
 	self.fixture:setFriction(friction)
@@ -24,8 +24,8 @@ function Enemy:_init(world, position, friction, radius)
 	self.fixture:setUserData(self)
 	
 	self.facingRight=true
-	self.leftFoot=Sensor(world, {x=-radius+10, y=radius}, 10, 10, self)
-	self.rightFoot=Sensor(world, {x=radius-10, y=radius}, 10, 10, self)
+	self.leftFoot=Sensor(level, {x=-radius+10, y=radius}, 10, 10, self)
+	self.rightFoot=Sensor(level, {x=radius-10, y=radius}, 10, 10, self)
 	
 	self.speed=0.25
 	self.segments=20

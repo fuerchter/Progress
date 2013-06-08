@@ -10,7 +10,7 @@ setmetatable(Level, {
 })
 
 --creates a level
-function Level.new(world, name)
+function Level.new(name)
 	local self = setmetatable({}, Level)
 
 	--load file and parse
@@ -21,6 +21,12 @@ function Level.new(world, name)
 	local fileContents = xmlFile:read()
 	
 	local xml = xmlParser:ParseXmlText(fileContents)
+	
+	--physics
+	love.physics.setMeter(64)
+	self.world = love.physics.newWorld(0, 9.81*64, true)
+	self.world:setAllowSleeping(false)
+	self.world:setCallbacks(beginContact, endContact, preSolve, postSolve)
 	
 	--extract info
 	self.title = xml.level.info.title:value()
@@ -59,13 +65,13 @@ function Level.new(world, name)
 		local entity = xml.level.entities:children()[index]
 		
 		if entity["@type"] == "checkpoint" then 
-			self.entities[index] = Checkpoint(world, { x = entity["@x"], y = entity["@y"]}, 32)
+			self.entities[index] = Checkpoint(self, { x = entity["@x"], y = entity["@y"]}, 32)
 		elseif entity["@type"] == "battery" then
-			self.entities[index] = Battery(world, { x = entity["@x"], y = entity["@y"]}, 32)
+			self.entities[index] = Battery(self, { x = entity["@x"], y = entity["@y"]}, 32)
 		elseif entity["@type"] == "enemy" then
-			self.entities[index] = Enemy(world, { x = entity["@x"], y = entity["@y"]}, 0.2, 32)
+			self.entities[index] = Enemy(self, { x = entity["@x"], y = entity["@y"]}, 0.2, 32)
 		elseif entity["@type"] == "collectable" then
-			self.entities[index] = Collectable(world, { x = entity["@x"], y = entity["@y"]}, 32)
+			self.entities[index] = Collectable(self, { x = entity["@x"], y = entity["@y"]}, 32)
 		end
 		
     end
@@ -86,7 +92,7 @@ function Level.new(world, name)
 				points.insert(points, { x = vertex["@x"], y = vertex["@y"]})
 			end
 			
-			self.map:registerPlatform(world, { x = polygon["@x"], y = polygon["@y"]}, points, self.colorScheme[polygon["@type"]])
+			self.map:registerPlatform(self, { x = polygon["@x"], y = polygon["@y"]}, points, self.colorScheme[polygon["@type"]])
 		
 		elseif xml.level.map:children()[poly]:name() == "text" then
 			-- waiting for implementation of class
@@ -96,10 +102,28 @@ function Level.new(world, name)
 	return self
 end
 
+function Level:getPhysicsWorld()
+	return self.world
+end
+
+function Level:getColorForType(colorType)
+	return self.colorScheme[colorType]
+end
+
+function Level:removeEntity(entity)
+	table.remove(self.entities, entity)
+end
+
+function Level:addEntity(entity)
+	table.insert(self.entities, entity)
+end
+
 function Level:update(dt)
 	for ent = 1, #self.entities do
 		self.entities[ent]:update(dt)
 	end
+	
+	self.world:update(dt)
 end
 
 function Level:draw()

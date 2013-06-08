@@ -14,10 +14,10 @@ setmetatable(Character, {
 
 --color will be boolean and loaded from config/level
 --color expects {r=rval, g=gval, b=bval, a=aval} (currently), points expects object of type Points
-function Character:_init(world, position, color, friction, radius)
-	Entity._init(self, "Character", position)
+function Character:_init(level, position, color, friction, radius)
+	Entity._init(self, level, "Character", position)
 	
-	local body=love.physics.newBody(world, position.x, position.y, "dynamic")
+	local body=love.physics.newBody(level.world, position.x, position.y, "dynamic")
 	local shape=love.physics.newCircleShape(radius)
 	self.fixture=love.physics.newFixture(body, shape, 1) --density?
 	self.fixture:setFriction(friction)
@@ -25,7 +25,7 @@ function Character:_init(world, position, color, friction, radius)
 	self.fixture:setUserData(self)
 	
 	--jump related stuff
-	self.foot=Sensor(world, {x=0, y=radius}, 10, 10, self)	
+	self.foot=Sensor(level, {x=0, y=radius}, 10, 10, self)	
 	self.jumpSpeed=1 --how fast we increase y when jumping
 	self.maxAirTime=0.2 --how long (in seconds) we can jump
 	self.airTime=0 --how long we are currently in the air already

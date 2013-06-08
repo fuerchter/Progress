@@ -12,11 +12,11 @@ setmetatable(Collectable, {
   end,
 })
 
-function Collectable:_init(world, position, radius)
-	Entity._init(self, "Collectable", position)
+function Collectable:_init(level, position, radius)
+	Entity._init(self, level, "Collectable", position)
 	
 	--color should automatically be lightcolor
-	local body=love.physics.newBody(world, position.x, position.y, "static")
+	local body=love.physics.newBody(level.world, position.x, position.y, "static")
 	local shape=love.physics.newCircleShape(radius)
 	self.fixture=love.physics.newFixture(body, shape, 1)
 	self.fixture:setSensor(true)

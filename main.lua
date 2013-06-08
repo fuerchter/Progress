@@ -8,37 +8,29 @@ require "Polygon"
 require "Points"
 require "Level"
 
-local world
-local character
-local polygon
-local checkpoint
-local collectable
+local level
 
 function love.load()
 	love.graphics.setMode(800, 600, false, false, 0)
 	
-	love.physics.setMeter(64)
-	world = love.physics.newWorld(0, 9.81*64, true)
-	world:setAllowSleeping(false)
-	world:setCallbacks(beginContact, endContact, preSolve, postSolve)
 	
-	character = Character(world, {x=300, y=000}, {r=100, g=100, b=255}, 0.2, 32)
-	--enemy=Enemy(world, {x=210, y=350}, 0.2, 32)
+	
+	--character = Character(world, {x=300, y=000}, {r=100, g=100, b=255}, 0.2, 32)
 
-	level=Level(world, "test")
+	level=Level("test")
+	
+	character = Character(level, {x=300, y=000}, {r=100, g=100, b=255}, 0.2, 32)
+	level:addEntity(character)
 end
 
 function love.update(dt)
-	character:update(dt)
-	--enemy:update(dt)
-	world:update(dt)
+	--character:update(dt)
 	level:update(dt)
 end
 
 function love.draw()
 	level:draw()
-	character:draw()
-	--enemy:draw()
+	--character:draw()
 	
 	love.graphics.setCaption(character.collected)
 end

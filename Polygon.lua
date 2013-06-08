@@ -9,10 +9,10 @@ setmetatable(Polygon, {
 
 --color will be boolean and loaded from config/level
 --color expects {r=rval, g=gval, b=bval, a=aval} (currently), points expects object of type Points
-function Polygon.new(world, position, color, friction, points)
+function Polygon.new(level, position, color, friction, points)
 	local self = setmetatable({}, Polygon)
 	
-	local body=love.physics.newBody(world, position.x, position.y, "static")
+	local body=love.physics.newBody(level.world, position.x, position.y, "static")
 	local shape=love.physics.newPolygonShape(points:getPoints())
 	self.fixture=love.physics.newFixture(body, shape, 1)
 	self.fixture:setFriction(friction)

@@ -12,13 +12,13 @@ setmetatable(Sensor, {
   end,
 })
 
-function Sensor:_init(world, offset, width, height, parent)
-	Entity._init(self, "Sensor", position)
+function Sensor:_init(level, offset, width, height, parent)
+	Entity._init(self, level, "Sensor", position)
 	
 	--color should automatically be lightcolor
 	local posX, posY=parent.fixture:getBody():getPosition()
 	
-	local body=love.physics.newBody(world, posX+offset.x, posY+offset.y, "dynamic")
+	local body=love.physics.newBody(level.world, posX+offset.x, posY+offset.y, "dynamic")
 	local shape=love.physics.newRectangleShape(width, height)
 	self.fixture=love.physics.newFixture(body, shape, 1)
 	self.fixture:setSensor(true)

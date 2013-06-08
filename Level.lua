@@ -61,9 +61,9 @@ function Level.new(world, name)
 		if entity["@type"] == "checkpoint" then 
 			self.entities[index] = Checkpoint(world, { x = entity["@x"], y = entity["@y"]}, 32)
 		elseif entity["@type"] == "battery" then
-			self.entities[index] = Checkpoint(world, { x = entity["@x"], y = entity["@y"]}, 32)
+			self.entities[index] = Battery(world, { x = entity["@x"], y = entity["@y"]}, 32)
 		elseif entity["@type"] == "enemy" then
-			-- waiting for implementation of class
+			self.entities[index] = Enemy(world, { x = entity["@x"], y = entity["@y"]}, 0.2, 32)
 		elseif entity["@type"] == "collectable" then
 			self.entities[index] = Collectable(world, { x = entity["@x"], y = entity["@y"]}, 32)
 		end

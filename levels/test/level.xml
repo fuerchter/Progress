@@ -17,6 +17,7 @@
 	<entities>
 		<entity type="checkpoint" x="500" y="350" />
 		<entity type="collectable" x="200" y="350" />
+		<entity type="enemy" x="200" y="350" />
 	</entities>
 	
 	<map spawnX="300" spawnY="0">

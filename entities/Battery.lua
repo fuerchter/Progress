@@ -20,7 +20,7 @@ function Battery:_init(world, position, radius)
 	local shape=love.physics.newCircleShape(radius)
 	self.fixture=love.physics.newFixture(body, shape, 1)
 	self.fixture:setSensor(true)
-	self.fixture:setUserData(self.type)
+	self.fixture:setUserData(self)
 	
 	self.segments=20
 	

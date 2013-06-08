@@ -1,5 +1,7 @@
 require "entities/Character"
 require "entities/Checkpoint"
+require "entities/Collectable"
+require "entities/Battery"
 require "Polygon"
 require "Points"
 require "Level"
@@ -8,6 +10,7 @@ local world
 local character
 local polygon
 local checkpoint
+local collectable
 
 function love.load()
 	love.graphics.setMode(800, 600, false, false, 0)
@@ -24,7 +27,9 @@ function love.load()
 	points:insert({x=100, y=100})
 	polygon = Polygon(world, {x=200, y=400}, {r=255, g=255, b=255}, 0.2, points)
 	
-	checkpoint=Checkpoint(world, {x=200, y=350}, 32)
+	--checkpoint=Checkpoint(world, {x=200, y=350}, 32)
+	collectable=Collectable(world, {x=200, y=350}, 32)
+
 
 	level=Level(world, "test")
 end
@@ -37,29 +42,49 @@ end
 
 function love.draw()
 	polygon:draw()
-	checkpoint:draw()
+	--checkpoint:draw()
+	collectable:draw()
 	character:draw()
 	character:drawFoot()
 	
+	love.graphics.setCaption(character.collected)	
 end
 
 function beginContact(a, b, coll)
-	if((a:getUserData()=="foot" and b:getUserData()~="character") --if foot is colliding but not with character
-	or (a:getUserData()~="character" and b:getUserData()=="foot"))
+	if((a:getUserData()=="Foot" and b:getUserData()~="Character") --if foot is colliding but not with character
+	or (a:getUserData()~="Character" and b:getUserData()=="Foot"))
 	then
 		character.groundCollisions=character.groundCollisions+1
 	end
+
 	
-	if((a:getUserData()=="character" and  b:getUserData()=="checkpoint") --character and checkpoint are colliding
-	or (a:getUserData()=="checkpoint" and  b:getUserData()=="character"))
+	if((a:getUserData()=="Character" and  b:getUserData()=="Checkpoint") --character and checkpoint are colliding
+	or (a:getUserData()=="Checkpoint" and  b:getUserData()=="Character"))
 	then
+		character.light=false
 		character.color={r=50, g=50, b=50, a=255}
+		
+		--TODO: destroy checkpoint (optional)
+	end
+	
+	if((a:getUserData()=="Character" and  b:getUserData()=="Collectable")
+	or (a:getUserData()=="Collectable" and  b:getUserData()=="Character"))
+	then
+		character.collected=character.collected+1
+		
+		--TODO: find out which collectable we have collided with and destroy it
+	end
+	
+	if((a:getUserData()=="Character" and  b:getUserData()=="Battery")
+	or (a:getUserData()=="Battery" and  b:getUserData()=="Character"))
+	then
+		--TODO: find out which battery we have collided with and destroy it, increase character.charge by an amount set in the corresponding battery
 	end
 end
 
 function endContact(a, b, coll)
-	if((a:getUserData()=="foot" and b:getUserData()~="character")
-	or (a:getUserData()~="character" and b:getUserData()=="foot"))
+	if((a:getUserData()=="Foot" and b:getUserData()~="Character")
+	or (a:getUserData()~="Character" and b:getUserData()=="Foot"))
 	then
 		character.groundCollisions=character.groundCollisions-1
 	end

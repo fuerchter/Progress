@@ -15,21 +15,21 @@ setmetatable(Character, {
 --color will be boolean and loaded from config/level
 --color expects {r=rval, g=gval, b=bval, a=aval} (currently), points expects object of type Points
 function Character:_init(world, position, color, friction, radius)
-	Entity._init(self, "character", position)
+	Entity._init(self, "Character", position)
 	
 	local body=love.physics.newBody(world, position.x, position.y, "dynamic")
 	local shape=love.physics.newCircleShape(radius)
 	self.fixture=love.physics.newFixture(body, shape, 1) --density?
 	self.fixture:setFriction(friction)
 	self.fixture:getBody():setFixedRotation(true) --else no friction is applied to the circle
-	self.speed=0.5
-	self.fixture:setUserData("character")
+	self.fixture:setUserData(self.type)
 	
+	--jupmp related stuff
 	local footBody=love.physics.newBody(world, position.x, position.y+radius, "dynamic")
 	local footShape=love.physics.newRectangleShape(10, 10) --10 by 10 foot at the bottom of our circle
 	self.foot=love.physics.newFixture(footBody, footShape, 1)
 	self.foot:setSensor(true)
-	self.foot:setUserData("foot")
+	self.foot:setUserData("Foot")
 	
 	self.groundCollisions=0 --current amount of foot collisions
 	self.jumpSpeed=1 --how fast we increase y when jumping
@@ -37,9 +37,13 @@ function Character:_init(world, position, color, friction, radius)
 	self.airTime=0 --how long we are currently in the air already
 	self.canJump=true
 	
+	
+	self.speed=0.5
 	self.segments=20
-	self.color=color
+	self.color=color	
 	self.light=true
+	self.collected=0
+	self.charge=0
 	return self
 end
 

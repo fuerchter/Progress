@@ -78,6 +78,8 @@ function Level.new(name)
 	
 	--extract map
 	self.spawn = { x = xml.level.map["@spawnX"], y = xml.level.map["@spawnY"]}
+	self.character = Character(self, self.spawn, self.colorScheme["light"], 0.2, 32)
+	
 	self.map = Map()
 
 	for poly = 1, #xml.level.map:children() do
@@ -123,6 +125,7 @@ function Level:update(dt)
 		self.entities[ent]:update(dt)
 	end
 	
+	self.character:update(dt)
 	self.world:update(dt)
 end
 
@@ -134,4 +137,6 @@ function Level:draw()
 	for ent = 1, #self.entities do
 		self.entities[ent]:draw()
 	end
+	
+	self.character:draw()
 end

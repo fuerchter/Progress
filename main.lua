@@ -11,28 +11,19 @@ require "Level"
 local level
 
 function love.load()
+	--initialise graphics
 	love.graphics.setMode(800, 600, false, false, 0)
 	
-	
-	
-	--character = Character(world, {x=300, y=000}, {r=100, g=100, b=255}, 0.2, 32)
-
+	--load level
 	level=Level("test")
-	
-	character = Character(level, {x=300, y=000}, {r=100, g=100, b=255}, 0.2, 32)
-	level:addEntity(character)
 end
 
 function love.update(dt)
-	--character:update(dt)
 	level:update(dt)
 end
 
 function love.draw()
 	level:draw()
-	--character:draw()
-	
-	love.graphics.setCaption(character.collected)
 end
 
 function beginContact(a, b, coll)
@@ -41,8 +32,8 @@ function beginContact(a, b, coll)
 		if((a:getUserData().type=="Character" and  b:getUserData().type=="Checkpoint") --character and checkpoint are colliding
 		or (a:getUserData().type=="Checkpoint" and  b:getUserData().type=="Character"))
 		then
-			character.light=false
-			character.color={r=50, g=50, b=50, a=255}
+			level.character.light=false
+			level.character.color={r=50, g=50, b=50, a=255}
 			
 			--TODO: destroy checkpoint (optional)
 		end
@@ -50,7 +41,7 @@ function beginContact(a, b, coll)
 		if((a:getUserData().type=="Character" and  b:getUserData().type=="Collectable")
 		or (a:getUserData().type=="Collectable" and  b:getUserData().type=="Character"))
 		then
-			character.collected=character.collected+1
+			level.character.collected=level.character.collected+1
 			
 			--TODO: find out which collectable we have collided with and destroy it
 		end

@@ -23,7 +23,7 @@
 	<map spawnX="300" spawnY="0">
 		<polygon type="dark" x="200" y="400" >
 			<vertex x="0" y="0" />
-			<vertex x="200" y="0" />
+			<vertex x="500" y="0" />
 			<vertex x="100" y="100" />
 		</polygon>
 	</map>

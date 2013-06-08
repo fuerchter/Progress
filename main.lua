@@ -1,6 +1,7 @@
-require "Character"
+require "entities/Character"
 require "Polygon"
 require "Points"
+--require "Level"
 
 local world
 local character
@@ -13,12 +14,14 @@ function love.load()
 	world=love.physics.newWorld(0, 9.81*64, true)
 	world:setAllowSleeping(false)
 	
-	character=Character.new	(world, {x=300, y=000}, {r=100, g=100, b=255}, 0.2, 32)
+	character=Character(world, {x=300, y=000}, {r=100, g=100, b=255}, 0.2, 32)
 	points=Points.new()
 	points:insert({x=0, y=0})
 	points:insert({x=200, y=0})
 	points:insert({x=100, y=100})
 	polygon=Polygon.new		(world, {x=200, y=400}, {r=255, g=255, b=255}, 0.2, points)
+
+	--level=Level.new("test")
 end
 
 function love.update(dt)

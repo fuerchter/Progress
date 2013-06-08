@@ -2,34 +2,31 @@ Character = {}
 Character.__index = Character
 
 --color will be boolean and loaded from config/level
-function Character.new(world, position, color, radius)
+function Character.new(world, position, color, friction, radius)
 	local self=setmetatable({}, Character)
 	
 	local body=love.physics.newBody(world, position.x, position.y, "dynamic")
 	local shape=love.physics.newCircleShape(radius)
 	self.fixture=love.physics.newFixture(body, shape, 1) --density?
-	self.fixture:getBody():setMass(0) --slows force???
+	self.fixture:setFriction(friction)
+	self.fixture:getBody():setFixedRotation(true) --else no friction is applied to the circle
 	self.color=color
 	return self
 end
 
 function Character.update(self, dt)
-	--[[if(love.keyboard.isDown("up"))
-	then
-		self.fixture:getBody():applyLinearImpulse(0, -50*dt)
-	end]]
 	if(love.keyboard.isDown("left"))
 	then
-		self.fixture:getBody():applyForce(-2, 0)
+		self.fixture:getBody():applyLinearImpulse(-0.5, 0)
 	end
 	if(love.keyboard.isDown("right"))
 	then
-		self.fixture:getBody():applyForce(2, 0)
+		self.fixture:getBody():applyLinearImpulse(0.5, 0)
 	end
 	
 	local velX, velY=self.fixture:getBody():getLinearVelocity()
 	local posX, posY=self.fixture:getBody():getPosition()
-	love.graphics.setCaption("Velocity: " .. math.floor(velX) .. " " .. math.floor(velY) .. " Position: " .. math.floor(posX) .. " " .. math.floor(posY))
+	love.graphics.setCaption("Velocity: " .. math.floor(velX) .. " " .. math.floor(velY) .. " Position: " .. math.floor(posX) .. " " .. math.floor(posY) .. " " .. self.fixture:getBody():getMass() .. " " .. self.fixture:getFriction())
 end
 
 function Character.draw(self)

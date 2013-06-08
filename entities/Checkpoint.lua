@@ -12,7 +12,7 @@ setmetatable(Checkpoint, {
   end,
 })
 
-function Checkpoint:_init(world, position, color, radius)
+function Checkpoint:_init(world, position, radius)
 	Entity._init(self, "checkpoint", position)
 	--color should automatically be darkcolor
 	local body=love.physics.newBody(world, position.x, position.y, "static")
@@ -22,7 +22,6 @@ function Checkpoint:_init(world, position, color, radius)
 	self.fixture:setUserData("checkpoint")
 	
 	self.segments=20
-	self.color=color
 	
 	return self
 end
@@ -33,6 +32,6 @@ end
 
 function Checkpoint.draw(self)
 	local x, y=self.fixture:getBody():getPosition()
-	love.graphics.setColor(self.color.r, self.color.g, self.color.b, self.color.a)
+	love.graphics.setColor(255, 0, 0, 255)
 	love.graphics.circle("fill", x, y, self.fixture:getShape():getRadius(), segments)
 end

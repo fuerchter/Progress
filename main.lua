@@ -2,7 +2,7 @@ require "entities/Character"
 require "entities/Checkpoint"
 require "Polygon"
 require "Points"
---require "Level"
+require "Level"
 
 local world
 local character
@@ -24,9 +24,9 @@ function love.load()
 	points:insert({x=100, y=100})
 	polygon = Polygon(world, {x=200, y=400}, {r=255, g=255, b=255}, 0.2, points)
 	
-	checkpoint=Checkpoint(world, {x=200, y=350}, {r=255, g=255, b=255}, 32)
+	checkpoint=Checkpoint(world, {x=200, y=350}, 32)
 
-	--level=Level("test")
+	level=Level(world, "test")
 end
 
 function love.update(dt)

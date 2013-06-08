@@ -1,8 +1,14 @@
 Points = {}
 Points.__index = Points
 
+setmetatable(Points, {
+	__call = function (cls, ...)
+				return cls.new(...)
+			end,
+})
+
 function Points.new()
-	local self=setmetatable({}, Points)
+	local self = setmetatable({}, Points)
 	return self
 end
 

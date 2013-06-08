@@ -1,0 +1,38 @@
+<level>
+	<info>
+		<title>Test</title>
+		<description>Just for testing</description>
+		<author>Adrian Wagner</author>
+	</info>
+
+	<config>
+		<music file="test.mp3" />
+		<colorscheme>
+			<colorLight r="255" g="255" b="255" a="255" />
+			<colorDark r="0" g="0" b="0" a="255" />
+			<colorBack r="100" g="100" b="100" a="255" />
+		</colorscheme>
+	</config>
+	
+	<entities>
+		<entity type="checkpoint" x="3" y="4" />
+		<entity type="battery" x="1" y="2" />
+		<entity type="collectable" x="3" y="4" />
+		<entity type="enemy" x="5" y="6" />
+	</entities>
+	
+	<map spawnX="21" spawnY="23">
+		<text x="2" y="4">Test</text>
+		<polygon type="dark" x="23" y="45" >
+			<vertex x="2" y="3" />
+			<vertex x="4" y="6" />
+			<vertex x="7" y="9" />
+		</polygon>
+		<polygon type="light" x="100" y="200" >
+			<vertex x="2" y="3" />
+			<vertex x="4" y="6" />
+			<vertex x="7" y="9" />
+		</polygon>
+	</map>
+</level>
+

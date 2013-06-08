@@ -22,7 +22,7 @@ function Polygon.new(world, position, color, friction, points)
 	return self
 end
 
-function Polygon.draw(self)
+function Polygon:draw()
 	love.graphics.setColor(self.color.r, self.color.g, self.color.b, self.color.a)
 	love.graphics.polygon("fill", self.fixture:getBody():getWorldPoints(self.fixture:getShape():getPoints()))
 end

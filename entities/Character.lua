@@ -47,7 +47,7 @@ function Character:_init(world, position, color, friction, radius)
 	return self
 end
 
-function Character.update(self, dt)
+function Character:update(dt)
 	if(self.airTime>self.maxAirTime) --jump climax
 	then
 		self.canJump=false
@@ -80,13 +80,13 @@ function Character.update(self, dt)
 	--love.graphics.setCaption("Velocity: " .. math.floor(velX) .. " " .. math.floor(velY) .. " Position: " .. math.floor(posX) .. " " .. math.floor(posY))
 end
 
-function Character.draw(self)
+function Character:draw()
 	local x, y=self.fixture:getBody():getPosition()
 	love.graphics.setColor(self.color.r, self.color.g, self.color.b, self.color.a)
 	love.graphics.circle("fill", x, y, self.fixture:getShape():getRadius(), segments)
 end
 
-function Character.drawFoot(self)
+function Character:drawFoot()
 	love.graphics.setColor(255, 0, 0, 122)
 	love.graphics.polygon("fill", self.foot:getBody():getWorldPoints(self.foot:getShape():getPoints()))
 end

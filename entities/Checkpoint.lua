@@ -27,11 +27,11 @@ function Checkpoint:_init(world, position, radius)
 	return self
 end
 
-function Checkpoint.update(self, dt)
+function Checkpoint:update(dt)
 	
 end
 
-function Checkpoint.draw(self)
+function Checkpoint:draw()
 	local x, y=self.fixture:getBody():getPosition()
 	love.graphics.setColor(255, 255, 255, 255)
 	love.graphics.circle("fill", x, y, self.fixture:getShape():getRadius(), segments)

@@ -27,11 +27,11 @@ function Collectable:_init(world, position, radius)
 	return self
 end
 
-function Collectable.update(self, dt)
+function Collectable:update(dt)
 	
 end
 
-function Collectable.draw(self)
+function Collectable:draw()
 	local x, y=self.fixture:getBody():getPosition()
 	love.graphics.setColor(255, 255, 255, 255)
 	love.graphics.circle("fill", x, y, self.fixture:getShape():getRadius(), segments)

@@ -27,11 +27,11 @@ function Battery:_init(world, position, radius)
 	return self
 end
 
-function Battery.update(self, dt)
+function Battery:update(dt)
 	
 end
 
-function Battery.draw(self)
+function Battery:draw()
 	local x, y=self.fixture:getBody():getPosition()
 	love.graphics.setColor(255, 255, 255, 255)
 	love.graphics.circle("fill", x, y, self.fixture:getShape():getRadius(), segments)

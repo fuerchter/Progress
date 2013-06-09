@@ -32,6 +32,15 @@ function Polygon.new(level, position, light, friction, points)
 end
 
 function Polygon:draw()
+	
+	if self.light then
+		for a = 1, 12 do
+			love.graphics.setLine(24 - a ,"smooth")
+			love.graphics.setColor(self.color.r, self.color.g, self.color.b, 5*a/2)
+			love.graphics.polygon("line", self.fixture:getBody():getWorldPoints(self.fixture:getShape():getPoints()))
+		end
+	end
+
 	love.graphics.setColor(self.color.r, self.color.g, self.color.b, self.color.a)
 	love.graphics.polygon("fill", self.fixture:getBody():getWorldPoints(self.fixture:getShape():getPoints()))
 end

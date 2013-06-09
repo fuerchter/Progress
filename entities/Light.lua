@@ -43,14 +43,18 @@ function Light:update(dt)
 	
 end
 
-function Light:draw()
-	love.graphics.setColor(self.level.colorScheme.light.r, 
+function Light:draw()	
+	for a = 1, 12 do
+		love.graphics.setLine(12 - a ,"smooth")
+		
+		love.graphics.setColor(self.level.colorScheme.light.r, 
 							self.level.colorScheme.light.g, 
 							self.level.colorScheme.light.b, 
-							self.level.colorScheme.light.a)
-	
-	for pos = 1, #self.sources-1 do
-		love.graphics.line(self.sources[pos].x + self.position.x, self.sources[pos].y + self.position.y,
-							self.sources[pos+1].x + self.position.x,self.sources[pos+1].y + self.position.y) 
+							20)
+			
+		for pos = 1, #self.sources-1 do
+			love.graphics.line(self.sources[pos].x + self.position.x, self.sources[pos].y + self.position.y,
+			self.sources[pos+1].x + self.position.x,self.sources[pos+1].y + self.position.y) 
+		end		
 	end
 end

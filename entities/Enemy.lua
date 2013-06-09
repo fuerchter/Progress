@@ -25,12 +25,12 @@ function Enemy:_init(level, position, friction, radius)
 	self.fixture:setFilterData(4, 7, 0)
 	
 	self.facingRight=true
-	self.leftFoot=Sensor(level, {x=-radius-10, y=radius}, 5, 5, self)
-	self.rightFoot=Sensor(level, {x=radius+10, y=radius}, 5, 5, self)
+	self.leftFoot=Sensor(level, {x=-5, y=radius}, 5, 5, self)
+	self.rightFoot=Sensor(level, {x=5, y=radius}, 5, 5, self)
 	self.leftFoot.fixture:setFilterData(4, 7, 0)
 	self.rightFoot.fixture:setFilterData(4, 7, 0)
 	
-	self.speed=15
+	self.speed=20
 	self.segments=20
 	return self
 end
@@ -42,12 +42,12 @@ function Enemy:update(dt)
 	if(self.facingRight and self.rightFoot.collisionCount==0)
 	then
 		self.facingRight=false
-		--self.fixture:getBody():setLinearVelocity(0, 0)
+		self.fixture:getBody():setLinearVelocity(0, 0)
 	end
 	if(not self.facingRight and self.leftFoot.collisionCount==0)
 	then
 		self.facingRight=true
-		--self.fixture:getBody():setLinearVelocity(0, 0)
+		self.fixture:getBody():setLinearVelocity(0, 0)
 	end
 	
 	if(not self.facingRight)
@@ -66,6 +66,6 @@ function Enemy:draw()
 	love.graphics.setColor(255, 255, 255, 255)
 	love.graphics.circle("fill", x, y, self.fixture:getShape():getRadius(), segments)
 	
-	self.leftFoot:draw()
-	self.rightFoot:draw()
+	--self.leftFoot:draw()
+	--self.rightFoot:draw()
 end

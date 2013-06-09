@@ -19,16 +19,25 @@ function love.load()
 	--initialise graphics
 	love.graphics.setMode(800, 600, false, false, 0)
 	
-	saveFile=love.filesystem.newFile("levels/save.txt")
-	saveFile:open("r")
-	contents, size=saveFile:read()
-	if(size>0)
+	saveFile=love.filesystem.newFile("save.txt")
+	if(not love.filesystem.isFile("save.txt"))
 	then
-		love.graphics.setCaption(size)
-		--love.graphics.setCaption(tonumber(contents) .. " " .. contents)
-		progress=tonumber(contents)
+		saveFile:open("w")
+		saveFile:write(progress)
+		saveFile:close()
+	else
+		saveFile:open("r")
+		contents, size=saveFile:read()
+		if(size>0)
+		then
+			--love.graphics.setCaption(tonumber(contents) .. " " .. contents)
+			if(tonumber(contents)<=levelCount)
+			then
+				progress=tonumber(contents)
+			end
+		end
+		saveFile:close()
 	end
-	saveFile:close()
 	
 	--load level
 	level=Level(progress)
@@ -53,11 +62,9 @@ function love.update(dt)
 		progress=progress+1
 		level=Level(progress)
 		
-		if(saveFile:open("w"))
-		then
-			saveFile:write(progress)
-			saveFile:close()
-		end
+		saveFile:open("w")
+		saveFile:write(progress)
+		saveFile:close()
 	end
 	
 	if love.keyboard.isDown("r") then
@@ -67,7 +74,9 @@ end
 
 function love.draw()
 	level:draw()
-	
+	love.graphics.setColorMode("modulate")
+	love.graphics.setColor(255, 0, 0, 255)
+	love.graphics.print("Collectables left: " .. level:entityTypeCount("Collectable") .. " Charge left: " .. level.character.charge, 0, 0)
 	--love.graphics.setCaption(level.character.lastLight .. " " .. tostring(level.character.canPlace))
 	--love.graphics.setCaption(level.character.airTime .. " " .. tostring(level.character.canJump) .. " " .. level.character.foot.collisionCount)
 	--love.graphics.setCaption("Collected: " .. level.character.collected .. " Collectables: " .. level:entityTypeCount("Collectable") .. " Charge: " .. level.character.charge)

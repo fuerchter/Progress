@@ -19,7 +19,7 @@
 		<entity type="collectable" x="766" y="300" />
 	</entities>
 	
-	<map spawnX="36" spawnY="288">
+	<map spawnX="36" spawnY="276">
 		<text x="0" y="324">Move: Press up, left and right</text>
 		<text x="275" y="252">Checkpoint: converts you to a shadow</text>
 		<text x="220" y="338">Light characters collide with shadow platforms (and vice versa)</text>

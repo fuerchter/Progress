@@ -26,6 +26,7 @@ function Sensor:_init(level, offset, width, height, parent)
 	self.offset=offset
 	self.parent=parent
 	self.collisionCount=0
+	self.fixture:setFilterData(4, 4, 0)
 	
 	return self
 end

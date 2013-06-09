@@ -86,7 +86,7 @@ function Character:setLight(light)
 		self.fixture:setFilterData(1, 1, 1)
 		self.color=self.level:getColorForType("light")
 	else
-		self.fixture:setFilterData(1, 1, 2)
+		self.fixture:setFilterData(2, 1, 2)
 		self.color=self.level:getColorForType("dark")
 	end
 	--self.fixture:setMask(3)

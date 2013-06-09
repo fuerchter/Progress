@@ -24,6 +24,7 @@ end
 
 function love.draw()
 	level:draw()
+	love.graphics.setCaption(level.character.collected)
 end
 
 function beginContact(a, b, coll)

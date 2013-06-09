@@ -1,0 +1,51 @@
+<level>
+	<info>
+		<title>Test</title>
+		<description>Just for testing</description>
+		<author>Adrian Wagner</author>
+	</info>
+
+	<config>
+		<music file="test.mp3" />
+		<colorscheme>
+			<colorLight r="0" g="255" b="0" a="255" />
+			<colorDark r="0" g="0" b="0" a="255" />
+			<colorBack r="122" g="122" b="122" a="255" />
+		</colorscheme>
+	</config>
+	
+	<entities>
+		<entity type="battery" x="612" y="313" />
+		<entity type="collectable" x="60" y="252" />
+		<entity type="collectable" x="60" y="322" />
+		<entity type="checkpoint" x="400" y="208" />
+		<entity type="enemy" x="760" y="276" />
+	</entities>
+	
+	<map spawnX="36" spawnY="264">
+		<polygon type="dark" x="0" y="288" >
+			<vertex x="0" y="0" />
+			<vertex x="400" y="-32" />
+			<vertex x="600" y="0" />
+			<vertex x="400" y="30" />
+		</polygon>
+		<polygon type="light" x="600" y="288" >
+			<vertex x="0" y="0" />
+			<vertex x="200" y="0" />
+			<vertex x="200" y="24" />
+		</polygon>
+		<polygon type="dark" x="600" y="325" >
+			<vertex x="0" y="0" />
+			<vertex x="200" y="0" />
+			<vertex x="400" y="32" />
+			<vertex x="-200" y="32" />
+		</polygon>
+		<polygon type="dark" x="0" y="357" >
+			<vertex x="0" y="0" />
+			<vertex x="800" y="0" />
+			<vertex x="800" y="263" />
+			<vertex x="0" y="263" />
+		</polygon>
+		
+	</map>
+</level>

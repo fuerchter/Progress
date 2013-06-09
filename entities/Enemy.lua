@@ -30,7 +30,7 @@ function Enemy:_init(level, position, friction, radius)
 	self.leftFoot.fixture:setFilterData(4, 7, 0)
 	self.rightFoot.fixture:setFilterData(4, 7, 0)
 	
-	self.speed=20
+	self.speed=25
 	self.segments=20
 	return self
 end
@@ -58,7 +58,7 @@ function Enemy:update(dt)
 	then
 		self.fixture:getBody():applyLinearImpulse(self.speed*dt, 0)
 	end
-	--love.graphics.setCaption(self.leftFoot.collisionCount .. " " .. self.rightFoot.collisionCount .. "Facing right? " .. tostring(self.facingRight))
+	love.graphics.setCaption(self.leftFoot.collisionCount .. " " .. self.rightFoot.collisionCount .. "Facing right? " .. tostring(self.facingRight))
 end
 
 function Enemy:draw()

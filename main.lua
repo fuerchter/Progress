@@ -13,11 +13,22 @@ require "Level"
 local level
 local progress=1
 local levelCount=3
+local saveFile
 
 function love.load()
 	--initialise graphics
 	love.graphics.setMode(800, 600, false, false, 0)
 	
+	saveFile=love.filesystem.newFile("levels/save.txt")
+	saveFile:open("r")
+	contents, size=saveFile:read()
+	if(size>0)
+	then
+		love.graphics.setCaption(size)
+		--love.graphics.setCaption(tonumber(contents) .. " " .. contents)
+		progress=tonumber(contents)
+	end
+	saveFile:close()
 	
 	--load level
 	level=Level(progress)
@@ -41,6 +52,12 @@ function love.update(dt)
 	then
 		progress=progress+1
 		level=Level(progress)
+		
+		if(saveFile:open("w"))
+		then
+			saveFile:write(progress)
+			saveFile:close()
+		end
 	end
 	
 	if love.keyboard.isDown("r") then
@@ -50,8 +67,9 @@ end
 
 function love.draw()
 	level:draw()
+	
 	--love.graphics.setCaption(level.character.lastLight .. " " .. tostring(level.character.canPlace))
-	love.graphics.setCaption(level.character.airTime .. " " .. tostring(level.character.canJump) .. " " .. level.character.foot.collisionCount)
+	--love.graphics.setCaption(level.character.airTime .. " " .. tostring(level.character.canJump) .. " " .. level.character.foot.collisionCount)
 	--love.graphics.setCaption("Collected: " .. level.character.collected .. " Collectables: " .. level:entityTypeCount("Collectable") .. " Charge: " .. level.character.charge)
 end
 

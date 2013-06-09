@@ -4,8 +4,10 @@ require "entities/Collectable"
 require "entities/Battery"
 require "entities/Sensor"
 require "entities/Enemy"
-require "Polygon"
-require "Points"
+require "entities/Light"
+require "mapobjects/Polygon"
+require "mapobjects/Points"
+require "mapobjects/Text"
 require "Level"
 
 local level
@@ -16,6 +18,10 @@ function love.load()
 	
 	--load level
 	level=Level("test")
+	
+	light = Light(level, {x = 100, y = 100})
+	light:registerSource({x = 200, y = 120})
+	light:registerSource({x = 300, y = 80})
 end
 
 function love.update(dt)
@@ -24,7 +30,8 @@ end
 
 function love.draw()
 	level:draw()
-	love.graphics.setCaption(level.character.collected)
+	light:draw()
+	love.graphics.setCaption(level.character.foot.collisionCount .. " " .. level.character.airTime)
 end
 
 function beginContact(a, b, coll)

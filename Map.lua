@@ -1,6 +1,3 @@
-require "Polygon"
-require "Text"
-
 Map = {}
 Map.__index = Map
 

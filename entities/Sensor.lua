@@ -41,6 +41,10 @@ end
 function Sensor.update(self, dt)
 	local posX, posY=self.parent.fixture:getBody():getPosition()
 	self.fixture:getBody():setPosition(posX+self.offset.x, posY+self.offset.y)
+	
+	--[[x1, y1, x2, y2, x3, y3, x4, y4=self.fixture:getBody():getWorldPoints(self.fixture:getShape():getPoints())
+	love.graphics.setCaption(posX+self.offset.x .. " " .. posY+self.offset.y)
+	love.graphics.setCaption(x1 .. " " .. y1 .. " " .. x2 .. " " .. y2 .. " " .. x3 .. " " .. y3 .. " " .. x4 .. " " .. y4)]]
 end
 
 function Sensor.draw(self)

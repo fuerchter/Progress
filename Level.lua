@@ -55,6 +55,8 @@ function Level.new(name)
 									}
 						}
 	
+	love.graphics.setBackgroundColor(self.colorScheme.back.r, self.colorScheme.back.g, self.colorScheme.back.b)
+	
 	self.music = xml.level.config.music["@file"]
 	
 	--extract entities
@@ -121,7 +123,22 @@ function Level:getColorForType(colorType)
 end
 
 function Level:removeEntity(entity)
-	table.remove(self.entities, entity)
+	pos=self:findEntity(entity)
+	if(pos~=-1)
+	then
+		table.remove(self.entities, pos)
+	end
+end
+
+function Level:findEntity(entity)
+	for i=1, #self.entities
+	do
+		if(self.entities[i]==entity)
+		then
+			return i
+		end
+	end
+	return -1
 end
 
 function Level:addEntity(entity)

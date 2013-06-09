@@ -9,14 +9,15 @@
 		<music file="test.mp3" />
 		<colorscheme>
 			<colorLight r="0" g="255" b="0" a="255" />
-			<colorDark r="255" g="0" b="0" a="255" />
-			<colorBack r="0" g="0" b="255" a="255" />
+			<colorDark r="0" g="0" b="0" a="255" />
+			<colorBack r="122" g="122" b="122" a="255" />
 		</colorscheme>
 	</config>
 	
 	<entities>
-		<entity type="collectable" x="500" y="350" />
-		<entity type="checkpoint" x="400" y="350" />
+		<entity type="checkpoint" x="500" y="350" />
+		<entity type="battery" x="400" y="350" />
+		<entity type="enemy" x="400" y="400" />
 	</entities>
 	
 	<map spawnX="300" spawnY="0">
@@ -33,4 +34,3 @@
 		</polygon>
 	</map>
 </level>
-

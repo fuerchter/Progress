@@ -77,7 +77,6 @@ function Character:update(dt)
 end
 
 function Character:setLight(light)
-	
 	self.foot:setLight(light)
 	
 	self.light=light
@@ -86,10 +85,10 @@ function Character:setLight(light)
 		-- setFilterData(x,y,z)
 		-- first it is checked wether the two z values of colliding bodies are the same, if true - they collide (used for the platforms)
 		-- if the z values are different, it is checked wether object1's x is the same as object2's y and the same in the opposite direction, if true - they collide (used for the checkpoint)
-		self.fixture:setFilterData(1, 1, 1)
+		self.fixture:setFilterData(1, 5, 1)
 		self.color=self.level:getColorForType("light")
 	else
-		self.fixture:setFilterData(2, 1, 2)
+		self.fixture:setFilterData(2, 5, 2)
 		self.color=self.level:getColorForType("dark")
 	end
 	--self.fixture:setMask(3)

@@ -22,12 +22,15 @@ function Enemy:_init(level, position, friction, radius)
 	self.fixture:setFriction(friction)
 	self.fixture:getBody():setFixedRotation(true) --else no friction is applied to the circle
 	self.fixture:setUserData(self)
+	self.fixture:setFilterData(4, 7, 0)
 	
 	self.facingRight=true
-	self.leftFoot=Sensor(level, {x=-radius+10, y=radius}, 10, 10, self)
-	self.rightFoot=Sensor(level, {x=radius-10, y=radius}, 10, 10, self)
+	self.leftFoot=Sensor(level, {x=-radius-10, y=radius}, 10, 10, self)
+	self.rightFoot=Sensor(level, {x=radius+10, y=radius}, 10, 10, self)
+	self.leftFoot.fixture:setFilterData(4, 7, 0)
+	self.rightFoot.fixture:setFilterData(4, 7, 0)
 	
-	self.speed=0.25
+	self.speed=0.12
 	self.segments=20
 	return self
 end
@@ -39,12 +42,12 @@ function Enemy:update(dt)
 	if(self.facingRight and self.rightFoot.collisionCount==0)
 	then
 		self.facingRight=false
-		self.fixture:getBody():setLinearVelocity(0, 0)
+		--self.fixture:getBody():setLinearVelocity(0, 0)
 	end
 	if(not self.facingRight and self.leftFoot.collisionCount==0)
 	then
 		self.facingRight=true
-		self.fixture:getBody():setLinearVelocity(0, 0)
+		--self.fixture:getBody():setLinearVelocity(0, 0)
 	end
 	
 	if(not self.facingRight)

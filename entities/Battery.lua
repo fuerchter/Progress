@@ -12,7 +12,7 @@ setmetatable(Battery, {
   end,
 })
 
-function Battery:_init(world, position, radius)
+function Battery:_init(level, position, radius)
 	Entity._init(self, level, "Battery", position)
 	
 	--color should automatically be lightcolor
@@ -21,6 +21,9 @@ function Battery:_init(world, position, radius)
 	self.fixture=love.physics.newFixture(body, shape, 1)
 	self.fixture:setSensor(true)
 	self.fixture:setUserData(self)
+	self.fixture:setFilterData(1, 1, 0)
+	
+	self.charge=10 --by how much the character's charge will be increased if this is gathered
 	
 	self.segments=20
 	

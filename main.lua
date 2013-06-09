@@ -40,11 +40,14 @@ function beginContact(a, b, coll)
 		if((a:getUserData().type=="Character" and  b:getUserData().type=="Checkpoint") --character and checkpoint are colliding
 		or (a:getUserData().type=="Checkpoint" and  b:getUserData().type=="Character"))
 		then
-			--[[level.character.light=false
-			level.character.color={r=50, g=50, b=50, a=255}]]
 			level.character:setLight(false)
 			
-			--TODO: destroy checkpoint (optional)
+			if(a:getUserData().type=="Checkpoint")
+			then
+				level:removeEntity(a:getUserData())
+			else
+				level:removeEntity(b:getUserData())
+			end
 		end
 		
 		if((a:getUserData().type=="Character" and  b:getUserData().type=="Collectable")
@@ -52,13 +55,31 @@ function beginContact(a, b, coll)
 		then
 			level.character.collected=level.character.collected+1
 			
-			--TODO: find out which collectable we have collided with and destroy it
+			if(a:getUserData().type=="Collectable")
+			then
+				level:removeEntity(a:getUserData())
+			else
+				level:removeEntity(b:getUserData())
+			end
 		end
 		
 		if((a:getUserData().type=="Character" and  b:getUserData().type=="Battery")
 		or (a:getUserData().type=="Battery" and  b:getUserData().type=="Character"))
 		then
-			--TODO: find out which battery we have collided with and destroy it, increase character.charge by an amount set in the corresponding battery
+			if(a:getUserData().type=="Battery")
+			then
+				b:getUserData().charge=b:getUserData().charge+a:getUserData().charge
+				level:removeEntity(a:getUserData())
+			else
+				a:getUserData().charge=a:getUserData().charge+b:getUserData().charge
+				level:removeEntity(b:getUserData())
+			end
+		end
+		
+		if((a:getUserData().type=="Character" and  b:getUserData().type=="Enemy")
+		or (a:getUserData().type=="Enemy" and  b:getUserData().type=="Character"))
+		then
+			--reset to checkpoint
 		end
 	elseif(a:getUserData()~=nil and b:getUserData()==nil) --a is entity
 	then

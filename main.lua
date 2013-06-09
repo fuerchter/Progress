@@ -12,12 +12,13 @@ require "Level"
 
 local level
 local progress=1
-local levelCount=9
+local levelCount=10
 local saveFile
 
 function love.load()
 	--initialise graphics
 	love.graphics.setMode(800, 600, false, false, 0)
+	love.graphics.setCaption("Progress")
 	
 	saveFile=love.filesystem.newFile("save.txt")
 	if(not love.filesystem.isFile("save.txt"))

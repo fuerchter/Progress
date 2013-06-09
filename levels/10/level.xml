@@ -1,0 +1,74 @@
+<level>
+	<info>
+		<title>Test</title>
+		<description>Just for testing</description>
+		<author>fuerchter</author>
+	</info>
+
+	<config>
+		<music file="test.mp3" />
+		<colorscheme>
+			<colorLight r="255" g="0" b="0" a="255" />
+			<colorDark r="0" g="0" b="0" a="255" />
+			<colorBack r="122" g="122" b="122" a="255" />
+		</colorscheme>
+	</config>
+	
+	<entities>
+		<entity type="battery" x="388" y="192" />
+		<entity type="battery" x="388" y="272" />
+		<entity type="collectable" x="312" y="112" />
+		<entity type="collectable" x="312" y="192" />
+		<entity type="collectable" x="312" y="272" />
+		<entity type="checkpoint" x="388" y="352" />
+		<entity type="enemy" x="488" y="152" />
+		<entity type="enemy" x="488" y="232" />
+	</entities>
+	
+	<map spawnX="350" spawnY="112">
+		<text x="300" y="85">Final level</text>
+		<polygon type="dark" x="300" y="124" >
+			<vertex x="0" y="0" />
+			<vertex x="100" y="0" />
+			<vertex x="100" y="12" />
+			<vertex x="0" y="12" />
+		</polygon>
+		<polygon type="dark" x="400" y="164" >
+			<vertex x="0" y="0" />
+			<vertex x="100" y="0" />
+			<vertex x="100" y="12" />
+			<vertex x="0" y="12" />
+		</polygon>
+		<polygon type="dark" x="300" y="204" >
+			<vertex x="0" y="0" />
+			<vertex x="100" y="0" />
+			<vertex x="100" y="12" />
+			<vertex x="0" y="12" />
+		</polygon>
+		<polygon type="dark" x="400" y="244" >
+			<vertex x="0" y="0" />
+			<vertex x="100" y="0" />
+			<vertex x="100" y="12" />
+			<vertex x="0" y="12" />
+		</polygon>
+		<polygon type="dark" x="300" y="284" >
+			<vertex x="0" y="0" />
+			<vertex x="100" y="0" />
+			<vertex x="100" y="12" />
+			<vertex x="0" y="12" />
+		</polygon>
+		<polygon type="dark" x="450" y="324" >
+			<vertex x="0" y="0" />
+			<vertex x="50" y="0" />
+			<vertex x="50" y="12" />
+			<vertex x="0" y="12" />
+		</polygon>
+		<polygon type="light" x="300" y="364" >
+			<vertex x="0" y="0" />
+			<vertex x="200" y="0" />
+			<vertex x="200" y="12" />
+			<vertex x="0" y="12" />
+		</polygon>
+		
+	</map>
+</level>

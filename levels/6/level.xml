@@ -1,7 +1,7 @@
 <level>
 	<info>
-		<title>6</title>
-		<description>Ressource management is mandatory</description>
+		<title>Test</title>
+		<description>Just for testing</description>
 		<author>Adrian Wagner</author>
 	</info>
 
@@ -15,55 +15,37 @@
 	</config>
 	
 	<entities>
-		<entity type="battery" x="350" y="288" />
-		<entity type="battery" x="550" y="388" />
-		<entity type="collectable" x="120" y="188" />
-		<entity type="checkpoint" x="750" y="488" />
+		<entity type="battery" x="764" y="264" />
+		<entity type="collectable" x="464" y="252" />
+		<entity type="collectable" x="60" y="250" />
+		<entity type="checkpoint" x="400" y="208" />
+		<entity type="enemy" x="312" y="260" />
 	</entities>
 	
-	<map spawnX="150" spawnY="188">
-		<text x="100" y="100">Getting back up is so much fun - so we removed some floors!</text>
-		<polygon type="dark" x="0" y="200" >
+	<map spawnX="36" spawnY="264">
+		<polygon type="dark" x="0" y="288" >
+			<vertex x="0" y="0" />
+			<vertex x="200" y="-16" />
+			<vertex x="200" y="16" />
+			<vertex x="0" y="32" />
+		</polygon>
+		<polygon type="dark" x="300" y="272" >
 			<vertex x="0" y="0" />
 			<vertex x="200" y="0" />
-			<vertex x="200" y="12" />
-			<vertex x="0" y="12" />
+			<vertex x="200" y="16" />
+			<vertex x="0" y="16" />
 		</polygon>
-		<polygon type="light" x="0" y="212" >
+		<polygon type="light" x="300" y="286" >
 			<vertex x="0" y="0" />
 			<vertex x="200" y="0" />
-			<vertex x="200" y="12" />
-			<vertex x="0" y="12" />
+			<vertex x="200" y="16" />
+			<vertex x="0" y="16" />
 		</polygon>
-		<polygon type="dark" x="200" y="300" >
-			<vertex x="0" y="0" />
+		<polygon type="dark" x="600" y="288" >
+			<vertex x="0" y="-16" />
 			<vertex x="200" y="0" />
-			<vertex x="200" y="12" />
-			<vertex x="0" y="12" />
-		</polygon>
-		<polygon type="dark" x="400" y="400" >
-			<vertex x="0" y="0" />
-			<vertex x="200" y="0" />
-			<vertex x="200" y="12" />
-			<vertex x="0" y="12" />
-		</polygon>
-		<polygon type="dark" x="350" y="350" >
-			<vertex x="0" y="0" />
-			<vertex x="100" y="0" />
-			<vertex x="100" y="12" />
-			<vertex x="0" y="12" />
-		</polygon>
-		<polygon type="dark" x="600" y="500" >
-			<vertex x="0" y="0" />
-			<vertex x="200" y="0" />
-			<vertex x="200" y="12" />
-			<vertex x="0" y="12" />
-		</polygon>
-		<polygon type="light" x="600" y="512" >
-			<vertex x="0" y="0" />
-			<vertex x="200" y="0" />
-			<vertex x="200" y="12" />
-			<vertex x="0" y="12" />
-		</polygon>
+			<vertex x="200" y="32" />
+			<vertex x="0" y="16" />
+		</polygon>		
 	</map>
 </level>

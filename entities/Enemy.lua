@@ -25,8 +25,8 @@ function Enemy:_init(level, position, friction, radius)
 	self.fixture:setFilterData(4, 7, 0)
 	
 	self.facingRight=true
-	self.leftFoot=Sensor(level, {x=-5, y=radius}, 5, 5, self)
-	self.rightFoot=Sensor(level, {x=5, y=radius}, 5, 5, self)
+	self.leftFoot=Sensor(level, {x=-15, y=radius}, 5, 5, self)
+	self.rightFoot=Sensor(level, {x=15, y=radius}, 5, 5, self)
 	self.leftFoot.fixture:setFilterData(4, 7, 0)
 	self.rightFoot.fixture:setFilterData(4, 7, 0)
 	
@@ -58,7 +58,7 @@ function Enemy:update(dt)
 	then
 		self.fixture:getBody():applyLinearImpulse(self.speed*dt, 0)
 	end
-	love.graphics.setCaption(self.leftFoot.collisionCount .. " " .. self.rightFoot.collisionCount .. "Facing right? " .. tostring(self.facingRight))
+	--love.graphics.setCaption(self.leftFoot.collisionCount .. " " .. self.rightFoot.collisionCount .. "Facing right? " .. tostring(self.facingRight))
 end
 
 function Enemy:draw()

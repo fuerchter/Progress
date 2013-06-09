@@ -23,7 +23,8 @@ function Battery:_init(level, position, radius)
 	self.fixture:setUserData(self)
 	self.fixture:setFilterData(1, 1, 0)
 	
-	self.charge=10 --by how much the character's charge will be increased if this is gathered
+	self.charge=50 --by how much the character's charge will be increased if this is gathered
+	self.active=true
 	
 	self.segments=20
 	

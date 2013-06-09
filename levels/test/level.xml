@@ -17,13 +17,19 @@
 	<entities>
 		<entity type="checkpoint" x="500" y="350" />
 		<entity type="battery" x="400" y="350" />
-		<entity type="enemy" x="400" y="400" />
+		<entity type="collectable" x="50" y="350" />
+		<entity type="enemy" x="400" y="350" />
 	</entities>
 	
 	<map spawnX="300" spawnY="0">
 		<text x="100" y="100">Testing Text</text>
 		<polygon type="dark" x="200" y="400" >
 			<vertex x="0" y="0" />
+			<vertex x="200" y="0" />
+			<vertex x="100" y="100" />
+		</polygon>
+		<polygon type="dark" x="0" y="400" >
+			<vertex x="0" y="50" />
 			<vertex x="200" y="0" />
 			<vertex x="100" y="100" />
 		</polygon>

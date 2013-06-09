@@ -32,9 +32,9 @@ end
 
 function Sensor:setLight(light)
 	if light then
-		self.fixture:setFilterData(0, 0, 1)
+		self.fixture:setFilterData(1, 5, 1)
 	else
-		self.fixture:setFilterData(0, 0, 2)
+		self.fixture:setFilterData(2, 5, 2)
 	end
 end
 
@@ -42,6 +42,8 @@ function Sensor.update(self, dt)
 	local posX, posY=self.parent.fixture:getBody():getPosition()
 	self.fixture:getBody():setPosition(posX+self.offset.x, posY+self.offset.y)
 	
+	x, y, z=self.fixture:getFilterData()
+	--love.graphics.setCaption(x .. " " .. y .. " " .. z)
 	--[[x1, y1, x2, y2, x3, y3, x4, y4=self.fixture:getBody():getWorldPoints(self.fixture:getShape():getPoints())
 	love.graphics.setCaption(posX+self.offset.x .. " " .. posY+self.offset.y)
 	love.graphics.setCaption(x1 .. " " .. y1 .. " " .. x2 .. " " .. y2 .. " " .. x3 .. " " .. y3 .. " " .. x4 .. " " .. y4)]]

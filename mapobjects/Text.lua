@@ -16,7 +16,7 @@ function Text.new(position, text)
 	return self
 end
 
-function Text:draw()
-	love.graphics.setColor(100, 100, 100, 255)
+function Text:draw(color)
+	love.graphics.setColor(color.r, color.g, color.b, color.a)
 	love.graphics.print(self.text, self.position.x, self.position.y)
 end

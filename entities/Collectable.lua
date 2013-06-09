@@ -23,6 +23,8 @@ function Collectable:_init(level, position, radius)
 	self.fixture:setUserData(self)
 	self.fixture:setFilterData(1, 2, 0)
 	
+	self.active=true
+	
 	self.segments=20
 	
 	return self

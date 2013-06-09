@@ -109,7 +109,7 @@ function Level.new(name, spawningEnabled)
 		elseif xml.level.map:children()[poly]:name() == "text" then
 			local text = xml.level.map:children()[poly]
 			
-			self.map:registerText({ x = text["@x"], y = text["@y"]}, text:value())
+			self.map:registerText({ x = text["@x"], y = text["@y"]}, text:value(), self.colorScheme.dark)
 		end
 	end
 	
@@ -146,6 +146,17 @@ function Level:findEntity(entity)
 	return -1
 end
 
+function Level:entityTypeCount(type)
+	res=0
+	for i=1, #self.entities
+	do
+		if(self.entities[i].type==type)
+		then
+			res=res+1
+		end
+	end
+	return res
+end
 function Level:fullReset()
 	return Level(self.name)
 end

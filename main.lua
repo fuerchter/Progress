@@ -18,12 +18,7 @@ function love.load()
 	
 	--load level
 	level=Level("test")
-	
-	light = Light(level, {x = 100, y = 300})
-	light:registerSource({x = 200, y = 320})
-	light:registerSource({x = 300, y = 280})
-	
-	level:addEntity(light)
+
 end
 
 function love.update(dt)
@@ -39,8 +34,14 @@ function love.update(dt)
 end
 
 function love.draw()
+	if(level:entityTypeCount("Collectable")==0)
+	then
+		love.graphics.print("victory!", 0, 0)
+	end
 	level:draw()
-	love.graphics.setCaption(level.character.foot.collisionCount .. " " .. level.character.airTime)
+	--love.graphics.setCaption(level.character.lastLight .. " " .. tostring(level.character.canPlace))
+	love.graphics.setCaption(level.character.airTime .. " " .. tostring(level.character.canJump) .. " " .. level.character.foot.collisionCount)
+	--love.graphics.setCaption("Collected: " .. level.character.collected .. " Collectables: " .. level:entityTypeCount("Collectable") .. " Charge: " .. level.character.charge)
 end
 
 function beginContact(a, b, coll)
@@ -62,26 +63,32 @@ function beginContact(a, b, coll)
 		if((a:getUserData().type=="Character" and  b:getUserData().type=="Collectable")
 		or (a:getUserData().type=="Collectable" and  b:getUserData().type=="Character"))
 		then
-			level.character.collected=level.character.collected+1
-			
-			if(a:getUserData().type=="Collectable")
+			if(a:getUserData().type=="Collectable" and a:getUserData().active)
 			then
 				level:removeEntity(a:getUserData())
-			else
+				a:getUserData().active=false
+				level.character.collected=level.character.collected+1
+			elseif(b:getUserData().type=="Collectable" and b:getUserData().active)
+			then
 				level:removeEntity(b:getUserData())
+				b:getUserData().active=false
+				level.character.collected=level.character.collected+1
 			end
 		end
 		
 		if((a:getUserData().type=="Character" and  b:getUserData().type=="Battery")
 		or (a:getUserData().type=="Battery" and  b:getUserData().type=="Character"))
 		then
-			if(a:getUserData().type=="Battery")
+			if(a:getUserData().type=="Battery" and a:getUserData().active)
 			then
 				b:getUserData().charge=b:getUserData().charge+a:getUserData().charge
 				level:removeEntity(a:getUserData())
-			else
+				a:getUserData().active=false
+			elseif(b:getUserData().type=="Battery" and b:getUserData().active)
+			then
 				a:getUserData().charge=a:getUserData().charge+b:getUserData().charge
 				level:removeEntity(b:getUserData())
+				b:getUserData().active=false
 			end
 		end
 		

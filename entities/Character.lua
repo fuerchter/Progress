@@ -26,13 +26,13 @@ function Character:_init(level, position, light, friction, radius)
 	
 	--jump related stuff
 	self.foot=Sensor(level, {x=0, y=radius}, 10, 10, self)	
-	self.jumpSpeed=1 --how fast we increase y when jumping
-	self.maxAirTime=0.2 --how long (in seconds) we can jump
+	self.jumpSpeed=1000 --how fast we increase y when jumping
+	self.maxAirTime=0.3 --how long (in seconds) we can jump
 	self.airTime=0 --how long we are currently in the air already
 	self.canJump=false
 	
 	
-	self.speed=0.5
+	self.speed=500
 	self.segments=20
 	
 	self.level=level
@@ -40,6 +40,11 @@ function Character:_init(level, position, light, friction, radius)
 	
 	self.collected=0
 	self.charge=0
+	
+	self.currentLight=nil --the character creates a local light
+	self.lightSpacing=0.1 --how many points of the light we create in seconds
+	self.lastLight=0
+	self.canPlace=true
 	return self
 end
 
@@ -57,22 +62,59 @@ function Character:update(dt)
 	
 	if(self.canJump and love.keyboard.isDown("up"))
 	then
-		self.fixture:getBody():applyLinearImpulse(0, -self.jumpSpeed)
+		self.fixture:getBody():applyLinearImpulse(0, -self.jumpSpeed*dt)
 		self.airTime=self.airTime+dt
 	end
+	
+	
 	if(love.keyboard.isDown("left"))
 	then
-		self.fixture:getBody():applyLinearImpulse(-self.speed, 0)
+		self.fixture:getBody():applyLinearImpulse(-self.speed*dt, 0)
 	end
 	if(love.keyboard.isDown("right"))
 	then
-		self.fixture:getBody():applyLinearImpulse(self.speed, 0)
+		self.fixture:getBody():applyLinearImpulse(self.speed*dt, 0)
 	end
+	
+	
+	
+	local posX, posY=self.fixture:getBody():getPosition()	
+	
+	if(not self.canPlace)
+	then
+		self.lastLight=self.lastLight+dt
+	end
+	
+	if(self.lastLight>self.lightSpacing)
+	then
+		self.canPlace=true
+		self.lastLight=0
+	end
+	
+	if(self.light and self.charge>0 and self.canPlace and love.keyboard.isDown("lctrl"))
+	then
+		if(self.currentLight==nil)
+		then
+			self.currentLight=Light(self.level, {x=posX, y=posY})
+			
+		else
+			self.currentLight:registerSource({x=posX, y=posY})
+		end
+		self.canPlace=false --initiates the lastLight counter
+		self.charge=self.charge-1
+	end
+	if(not love.keyboard.isDown("lctrl") and self.currentLight~=nil) --if the character contains a light but ctrl is not pressed we hand the light to the level
+	then
+		self.level:addEntity(self.currentLight)
+		self.currentLight=nil
+	end
+	
+	
+	
 	
 	self.foot:update(dt)
 	
-	--[[local velX, velY=self.fixture:getBody():getLinearVelocity()
-	local posX, posY=self.fixture:getBody():getPosition()	
+	--[[local velX, velY=self.fixture:getBody():getLinearVelocity()	
 	love.graphics.setCaption("Velocity: " .. math.floor(velX) .. " " .. math.floor(velY) .. " Position: " .. math.floor(posX) .. " " .. math.floor(posY))]]
 end
 
@@ -100,4 +142,9 @@ function Character:draw()
 	love.graphics.circle("fill", x, y, self.fixture:getShape():getRadius(), segments)
 
 	self.foot:draw()
+	
+	if(self.currentLight~=nil)
+	then
+		self.currentLight:draw()
+	end
 end

@@ -1,0 +1,69 @@
+<level>
+	<info>
+		<title>6</title>
+		<description>Ressource management is mandatory</description>
+		<author>Adrian Wagner</author>
+	</info>
+
+	<config>
+		<music file="test.mp3" />
+		<colorscheme>
+			<colorLight r="255" g="255" b="0" a="255" />
+			<colorDark r="0" g="0" b="0" a="255" />
+			<colorBack r="122" g="122" b="122" a="255" />
+		</colorscheme>
+	</config>
+	
+	<entities>
+		<entity type="battery" x="350" y="288" />
+		<entity type="battery" x="550" y="388" />
+		<entity type="collectable" x="120" y="188" />
+		<entity type="checkpoint" x="750" y="488" />
+	</entities>
+	
+	<map spawnX="150" spawnY="188">
+		<text x="100" y="100">Getting back up is so much fun - so we removed some floors!</text>
+		<polygon type="dark" x="0" y="200" >
+			<vertex x="0" y="0" />
+			<vertex x="200" y="0" />
+			<vertex x="200" y="12" />
+			<vertex x="0" y="12" />
+		</polygon>
+		<polygon type="light" x="0" y="212" >
+			<vertex x="0" y="0" />
+			<vertex x="200" y="0" />
+			<vertex x="200" y="12" />
+			<vertex x="0" y="12" />
+		</polygon>
+		<polygon type="dark" x="200" y="300" >
+			<vertex x="0" y="0" />
+			<vertex x="200" y="0" />
+			<vertex x="200" y="12" />
+			<vertex x="0" y="12" />
+		</polygon>
+		<polygon type="dark" x="400" y="400" >
+			<vertex x="0" y="0" />
+			<vertex x="200" y="0" />
+			<vertex x="200" y="12" />
+			<vertex x="0" y="12" />
+		</polygon>
+		<polygon type="dark" x="350" y="350" >
+			<vertex x="0" y="0" />
+			<vertex x="100" y="0" />
+			<vertex x="100" y="12" />
+			<vertex x="0" y="12" />
+		</polygon>
+		<polygon type="dark" x="600" y="500" >
+			<vertex x="0" y="0" />
+			<vertex x="200" y="0" />
+			<vertex x="200" y="12" />
+			<vertex x="0" y="12" />
+		</polygon>
+		<polygon type="light" x="600" y="512" >
+			<vertex x="0" y="0" />
+			<vertex x="200" y="0" />
+			<vertex x="200" y="12" />
+			<vertex x="0" y="12" />
+		</polygon>
+	</map>
+</level>

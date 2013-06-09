@@ -12,7 +12,7 @@ require "Level"
 
 local level
 local progress=1
-local levelCount=3
+local levelCount=6
 local saveFile
 
 function love.load()

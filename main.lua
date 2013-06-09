@@ -27,10 +27,6 @@ function love.update(dt)
 	if love.keyboard.isDown("r") then
 		level = level:fullReset()
 	end
-	
-	if love.keyboard.isDown("t") then
-		level = level:backToCheckpoint()
-	end
 end
 
 function love.draw()
@@ -95,7 +91,13 @@ function beginContact(a, b, coll)
 		if((a:getUserData().type=="Character" and  b:getUserData().type=="Enemy")
 		or (a:getUserData().type=="Enemy" and  b:getUserData().type=="Character"))
 		then
-			--reset to checkpoint
+			if(a:getUserData().type=="Character" and not a:getUserData().light)
+			then
+				level=level:backToCheckpoint()
+			elseif(b:getUserData().type=="Character" and not b:getUserData().light)
+			then
+				level=level:backToCheckpoint()
+			end
 		end
 	elseif(a:getUserData()~=nil and b:getUserData()==nil) --a is entity
 	then

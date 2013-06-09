@@ -141,7 +141,7 @@ function Character:draw()
 	love.graphics.setColor(self.color.r, self.color.g, self.color.b, self.color.a)
 	love.graphics.circle("fill", x, y, self.fixture:getShape():getRadius(), segments)
 
-	self.foot:draw()
+	--self.foot:draw()
 	
 	if(self.currentLight~=nil)
 	then

@@ -41,21 +41,8 @@ function Character:_init(level, position, light, friction, radius)
 	self.collected=0
 	self.charge=0
 	
-	local imagePath = "assets/"
-	
-	self.animTime = 0.125
-	self.animFrame = 1
-	self.direction = -1
-	self.assets = {
-						love.graphics.newImage(imagePath .. "man1.png"),
-						love.graphics.newImage(imagePath .. "man2.png"),
-						love.graphics.newImage(imagePath .. "man3.png"),
-						love.graphics.newImage(imagePath .. "man4.png"),
-						love.graphics.newImage(imagePath .. "man5.png"),
-						love.graphics.newImage(imagePath .. "man6.png"),
-						love.graphics.newImage(imagePath .. "man7.png"),
-						love.graphics.newImage(imagePath .. "man8.png")
-					}
+	self.direction = 1
+	self.image = love.graphics.newImage("assets/blob.png")
 	
 	self.currentLight=nil --the character creates a local light
 	self.lightSpacing=0.1 --how many points of the light we create in seconds
@@ -86,23 +73,14 @@ function Character:update(dt)
 	
 	if(love.keyboard.isDown("left"))
 	then
-		self.animTime = self.animTime - dt
-		self.direction = 1
+		self.direction = -1
 		self.fixture:getBody():applyLinearImpulse(-self.speed*dt, 0)
 	end
 	if(love.keyboard.isDown("right"))
 	then
-		self.animTime = self.animTime - dt
-		self.direction = -1
+		self.direction = 1
 		self.fixture:getBody():applyLinearImpulse(self.speed*dt, 0)
 	end
-
-	
-	if self.animTime < 0 then
-		self.animFrame = (self.animFrame) % 8 + 1
-		self.animTime = 0.125
-	end
-	
 	
 	local posX, posY=self.fixture:getBody():getPosition()	
 	
@@ -165,21 +143,18 @@ end
 function Character:draw()
 	local x, y=self.fixture:getBody():getPosition()
 	love.graphics.setColor(self.color.r, self.color.g, self.color.b, 100)
-	
-	local image = self.assets[self.animFrame]
-	
+
 	if self.light then
 		love.graphics.setColorMode("replace")
 	else
 		love.graphics.setColorMode("modulate")
 	end
 	
-	--scaling factor from size 64 to size 24: 0.375
-	love.graphics.draw(image, x, y, 0, self.direction*0.375, 1*0.375, 16, 32)
+	love.graphics.draw(self.image, x, y, 0, self.direction, 1, 12, 12)
 	
 	if(self.currentLight~=nil)
 	then
-		love.graphics.circle("fill", x - (16 * self.direction), y, 10)
+		love.graphics.circle("fill", x + (16 * self.direction), y, 10)
 		self.currentLight:draw()
 	end
 end

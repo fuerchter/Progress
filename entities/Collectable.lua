@@ -25,6 +25,8 @@ function Collectable:_init(level, position, radius)
 	
 	self.active=true
 	
+	self.image = love.graphics.newImage("assets/collect.png")
+	
 	self.segments=20
 	
 	return self
@@ -36,6 +38,6 @@ end
 
 function Collectable:draw()
 	local x, y=self.fixture:getBody():getPosition()
-	love.graphics.setColor(255, 255, 255, 255)
-	love.graphics.circle("fill", x, y, self.fixture:getShape():getRadius(), segments)
+	love.graphics.setColorMode("replace")
+	love.graphics.draw(self.image, x, y, 0, 1, 1, 12, 12)
 end

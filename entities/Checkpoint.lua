@@ -23,6 +23,8 @@ function Checkpoint:_init(level, position, radius)
 	self.fixture:setUserData(self)
 	self.fixture:setFilterData(1, 1, 0)
 	
+	self.image = love.graphics.newImage("assets/blob.png")
+	
 	self.segments=20
 	
 	return self
@@ -34,6 +36,8 @@ end
 
 function Checkpoint:draw()
 	local x, y=self.fixture:getBody():getPosition()
-	love.graphics.setColor(255, 255, 255, 255)
-	love.graphics.circle("fill", x, y, self.fixture:getShape():getRadius(), segments)
+	love.graphics.setColor(self.level.colorScheme.dark.r, self.level.colorScheme.dark.g, self.level.colorScheme.dark.b, 100)
+
+	love.graphics.setColorMode("modulate")
+	love.graphics.draw(self.image, x, y, 0, self.direction, 1, 12, 12)
 end

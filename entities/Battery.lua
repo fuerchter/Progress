@@ -23,6 +23,8 @@ function Battery:_init(level, position, radius)
 	self.fixture:setUserData(self)
 	self.fixture:setFilterData(1, 1, 0)
 	
+	self.image = love.graphics.newImage("assets/battery.png")
+	
 	self.charge=30 --by how much the character's charge will be increased if this is gathered
 	self.active=true
 	
@@ -37,6 +39,6 @@ end
 
 function Battery:draw()
 	local x, y=self.fixture:getBody():getPosition()
-	love.graphics.setColor(255, 255, 255, 255)
-	love.graphics.circle("fill", x, y, self.fixture:getShape():getRadius(), segments)
+	love.graphics.setColorMode("replace")
+	love.graphics.draw(self.image, x, y, 0, 1, 1, 12, 12)
 end

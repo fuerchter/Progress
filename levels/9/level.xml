@@ -1,0 +1,135 @@
+<level>
+	<info>
+		<title>9</title>
+		<description>Think!</description>
+		<author>Adrian Wagner</author>
+	</info>
+
+	<config>
+		<music file="test.mp3" />
+		<colorscheme>
+			<colorLight r="255" g="0" b="0" a="255" />
+			<colorDark r="0" g="0" b="0" a="255" />
+			<colorBack r="122" g="122" b="122" a="255" />
+		</colorscheme>
+	</config>
+	
+	<entities>
+		<entity type="enemy" x="125" y="443" />
+		<entity type="enemy" x="675" y="443" />
+		<entity type="enemy" x="400" y="538" />
+		<entity type="collectable" x="75" y="443" />
+		<entity type="collectable" x="725" y="443" />
+		<entity type="collectable" x="400" y="100" />
+		<entity type="checkpoint" x="580" y="450" />
+		<entity type="battery" x="650" y="188" />
+		<entity type="battery" x="650" y="188" />
+		<entity type="battery" x="650" y="188" />
+		<entity type="battery" x="650" y="188" />
+		<entity type="battery" x="650" y="188" />
+		<entity type="battery" x="650" y="188" />
+		<entity type="battery" x="650" y="188" />
+		<entity type="battery" x="650" y="188" />
+		<entity type="battery" x="650" y="188" />
+		<entity type="battery" x="650" y="188" />
+		<entity type="battery" x="650" y="188" />
+		<entity type="battery" x="650" y="188" />
+		<entity type="battery" x="650" y="188" />
+		<entity type="battery" x="650" y="188" />
+		<entity type="battery" x="650" y="188" />
+	</entities>
+	
+	<map spawnX="150" spawnY="188">
+		<text x="370" y="75">What now?</text>
+		<polygon type="dark" x="0" y="200" >
+			<vertex x="0" y="0" />
+			<vertex x="200" y="0" />
+			<vertex x="200" y="12" />
+			<vertex x="0" y="12" />
+		</polygon>
+		<polygon type="dark" x="200" y="200" >
+			<vertex x="0" y="0" />
+			<vertex x="100" y="50" />
+			<vertex x="100" y="62" />
+			<vertex x="0" y="12" />
+		</polygon>
+		<polygon type="dark" x="500" y="250" >
+			<vertex x="0" y="0" />
+			<vertex x="100" y="-50" />
+			<vertex x="100" y="-38" />
+			<vertex x="0" y="12" />
+		</polygon>
+		<polygon type="dark" x="300" y="300" >
+			<vertex x="0" y="0" />
+			<vertex x="200" y="0" />
+			<vertex x="200" y="12" />
+			<vertex x="0" y="12" />
+		</polygon>
+		<polygon type="dark" x="350" y="350" >
+			<vertex x="0" y="0" />
+			<vertex x="200" y="0" />
+			<vertex x="200" y="12" />
+			<vertex x="0" y="12" />
+		</polygon>
+		<polygon type="dark" x="250" y="400" >
+			<vertex x="0" y="0" />
+			<vertex x="200" y="0" />
+			<vertex x="200" y="12" />
+			<vertex x="0" y="12" />
+		</polygon>
+		<polygon type="dark" x="350" y="450" >
+			<vertex x="0" y="0" />
+			<vertex x="200" y="0" />
+			<vertex x="200" y="12" />
+			<vertex x="0" y="12" />
+		</polygon>
+		<polygon type="dark" x="600" y="200" >
+			<vertex x="0" y="0" />
+			<vertex x="200" y="0" />
+			<vertex x="200" y="12" />
+			<vertex x="0" y="12" />
+		</polygon>
+		<polygon type="light" x="0" y="500" >
+			<vertex x="0" y="0" />
+			<vertex x="200" y="0" />
+			<vertex x="200" y="12" />
+			<vertex x="0" y="12" />
+		</polygon>
+		<polygon type="light" x="200" y="500" >
+			<vertex x="0" y="0" />
+			<vertex x="100" y="25" />
+			<vertex x="100" y="38" />
+			<vertex x="0" y="12" />
+		</polygon>
+		<polygon type="light" x="500" y="550" >
+			<vertex x="0" y="-25" />
+			<vertex x="100" y="-50" />
+			<vertex x="100" y="-38" />
+			<vertex x="0" y="-13" />
+		</polygon>
+		<polygon type="light" x="315" y="550" >
+			<vertex x="0" y="0" />
+			<vertex x="170" y="0" />
+			<vertex x="170" y="12" />
+			<vertex x="0" y="12" />
+		</polygon>
+		<polygon type="light" x="600" y="500" >
+			<vertex x="0" y="0" />
+			<vertex x="200" y="0" />
+			<vertex x="200" y="12" />
+			<vertex x="0" y="12" />
+		</polygon>
+		<polygon type="light" x="650" y="455" >
+			<vertex x="0" y="0" />
+			<vertex x="100" y="0" />
+			<vertex x="100" y="5" />
+			<vertex x="0" y="5" />
+		</polygon>
+		<polygon type="light" x="50" y="455" >
+			<vertex x="0" y="0" />
+			<vertex x="100" y="0" />
+			<vertex x="100" y="5" />
+			<vertex x="0" y="5" />
+		</polygon>
+	</map>
+</level>

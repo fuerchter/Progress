@@ -19,18 +19,27 @@ function love.load()
 	--load level
 	level=Level("test")
 	
-	light = Light(level, {x = 100, y = 100})
-	light:registerSource({x = 200, y = 120})
-	light:registerSource({x = 300, y = 80})
+	light = Light(level, {x = 100, y = 300})
+	light:registerSource({x = 200, y = 320})
+	light:registerSource({x = 300, y = 280})
+	
+	level:addEntity(light)
 end
 
 function love.update(dt)
 	level:update(dt)
+	
+	if love.keyboard.isDown("r") then
+		level = level:fullReset()
+	end
+	
+	if love.keyboard.isDown("t") then
+		level = level:backToCheckpoint()
+	end
 end
 
 function love.draw()
 	level:draw()
-	light:draw()
 	love.graphics.setCaption(level.character.foot.collisionCount .. " " .. level.character.airTime)
 end
 

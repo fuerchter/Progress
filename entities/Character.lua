@@ -36,7 +36,7 @@ function Character:_init(level, position, light, friction, radius)
 	self.segments=20
 	
 	self.level=level
-	self:setLight(true)
+	self:setLight(light)
 	
 	self.collected=0
 	self.charge=0

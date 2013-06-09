@@ -5,12 +5,12 @@ Level.__index = Level
 
 setmetatable(Level, {
 	__call = function (cls, ...)
-				return cls.new(...)
+				return cls.new(... , true)
 			end,
 })
 
 --creates a level
-function Level.new(name)
+function Level.new(name, spawningEnabled)
 	local self = setmetatable({}, Level)
 
 	--load file and parse
@@ -62,21 +62,23 @@ function Level.new(name)
 	--extract entities
 	self.entities = {}
 	
-    for index = 1, #xml.level.entities:children() do
-		
-		local entity = xml.level.entities:children()[index]
-		
-		if entity["@type"] == "checkpoint" then 
-			self.entities[index] = Checkpoint(self, { x = entity["@x"], y = entity["@y"]}, 32)
-		elseif entity["@type"] == "battery" then
-			self.entities[index] = Battery(self, { x = entity["@x"], y = entity["@y"]}, 32)
-		elseif entity["@type"] == "enemy" then
-			self.entities[index] = Enemy(self, { x = entity["@x"], y = entity["@y"]}, 0.2, 32)
-		elseif entity["@type"] == "collectable" then
-			self.entities[index] = Collectable(self, { x = entity["@x"], y = entity["@y"]}, 32)
+	if spawningEnabled then
+		for index = 1, #xml.level.entities:children() do
+			
+			local entity = xml.level.entities:children()[index]
+			
+			if entity["@type"] == "checkpoint" then 
+				self.entities[index] = Checkpoint(self, { x = entity["@x"], y = entity["@y"]}, 32)
+			elseif entity["@type"] == "battery" then
+				self.entities[index] = Battery(self, { x = entity["@x"], y = entity["@y"]}, 32)
+			elseif entity["@type"] == "enemy" then
+				self.entities[index] = Enemy(self, { x = entity["@x"], y = entity["@y"]}, 0.2, 32)
+			elseif entity["@type"] == "collectable" then
+				self.entities[index] = Collectable(self, { x = entity["@x"], y = entity["@y"]}, 32)
+			end
+			
 		end
-		
-    end
+	end
 	
 	--extract map
 	self.spawn = { x = xml.level.map["@spawnX"], y = xml.level.map["@spawnY"]}
@@ -111,6 +113,9 @@ function Level.new(name)
 		end
 	end
 	
+	self.xml = xml
+	self.name = name
+	
 	return self
 end
 
@@ -139,6 +144,57 @@ function Level:findEntity(entity)
 		end
 	end
 	return -1
+end
+
+function Level:fullReset()
+	return Level(self.name)
+end
+
+function Level:backToCheckpoint()
+	local lightData = {}
+	local lightPos = {}
+	
+	--save lights
+	for ent = 1, #self.entities do
+		if self.entities[ent].type == "Light" then
+			table.insert(lightPos, self.entities[ent].position)
+			table.insert(lightData, self.entities[ent].sources)
+		end
+	end
+	
+	--create new empty map
+	local newLevel = Level.new(self.name, false)
+	newLevel.entities = {}
+	
+	--now spawn everything needed
+    for index = 1, #self.xml.level.entities:children() do
+		
+		local entity = self.xml.level.entities:children()[index]
+		
+		if entity["@type"] == "checkpoint" then 
+			newLevel.character.fixture:getBody():setPosition(entity["@x"], entity["@y"])
+			newLevel.character:setLight(false)
+		elseif entity["@type"] == "enemy" then
+			newLevel.entities[#newLevel.entities+1] = Enemy(newLevel, { x = entity["@x"], y = entity["@y"]}, 0.2, 32)
+		elseif entity["@type"] == "collectable" then
+			newLevel.entities[#newLevel.entities+1] = Collectable(newLevel, { x = entity["@x"], y = entity["@y"]}, 32)
+		end
+		
+    end
+	
+	--add the lights again
+	for ent = 1, #lightData do
+		local light = Light(newLevel, lightPos[ent])
+		local sources = lightData[ent]
+	
+		for source = 1, #sources do
+			light:registerSource({ x = sources[source].x + light.position.x, y = sources[source].y + light.position.y})
+		end
+		
+		newLevel:addEntity(light)
+	end
+	
+	return newLevel
 end
 
 function Level:addEntity(entity)

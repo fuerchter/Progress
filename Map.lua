@@ -19,7 +19,7 @@ end
 
 --register new platform
 function Map:registerPlatform(level, position, points, light)
-	self.platforms[#self.platforms+1] = Polygon.new(level, position, light, 0.2, points)
+	self.platforms[#self.platforms+1] = Polygon(level, position, light, 0.2, points)
 end
 
 --register new text

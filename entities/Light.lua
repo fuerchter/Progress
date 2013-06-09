@@ -35,8 +35,9 @@ function Light:registerSource(point)
 	
 	self.chainShape = love.physics.newChainShape(false, unpack(self.vertex))
 	self.fixture = love.physics.newFixture(self.body, self.chainShape, 1)
+	self.fixture:setUserData(self)
 	self.fixture:setFriction(0.2)
-	self.fixture:setFilterData(4, 4, 1)
+	self.fixture:setFilterData(4, 4, 2)
 end
 
 function Light:update(dt)

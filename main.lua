@@ -11,18 +11,27 @@ require "mapobjects/Text"
 require "Level"
 
 local level
+local progress=1
+local levelCount=3
 
 function love.load()
 	--initialise graphics
 	love.graphics.setMode(800, 600, false, false, 0)
 	
+	
 	--load level
-	level=Level("test")
+	level=Level(progress)
 
 end
 
 function love.update(dt)
 	level:update(dt)
+	
+	if(level:entityTypeCount("Collectable")==0 and progress<levelCount)
+	then
+		progress=progress+1
+		level=Level(progress)
+	end
 	
 	if love.keyboard.isDown("r") then
 		level = level:fullReset()
@@ -30,10 +39,6 @@ function love.update(dt)
 end
 
 function love.draw()
-	if(level:entityTypeCount("Collectable")==0)
-	then
-		love.graphics.print("victory!", 0, 0)
-	end
 	level:draw()
 	--love.graphics.setCaption(level.character.lastLight .. " " .. tostring(level.character.canPlace))
 	love.graphics.setCaption(level.character.airTime .. " " .. tostring(level.character.canJump) .. " " .. level.character.foot.collisionCount)

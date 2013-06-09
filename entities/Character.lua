@@ -25,14 +25,14 @@ function Character:_init(level, position, light, friction, radius)
 	self.fixture:setUserData(self)
 	
 	--jump related stuff
-	self.foot=Sensor(level, {x=0, y=radius}, 10, 10, self)	
-	self.jumpSpeed=1000 --how fast we increase y when jumping
+	self.foot=Sensor(level, {x=0, y=radius}, 5, 5, self)	
+	self.jumpSpeed=100 --how fast we increase y when jumping
 	self.maxAirTime=0.3 --how long (in seconds) we can jump
 	self.airTime=0 --how long we are currently in the air already
 	self.canJump=false
 	
 	
-	self.speed=500
+	self.speed=35
 	self.segments=20
 	
 	self.level=level
@@ -174,7 +174,8 @@ function Character:draw()
 		love.graphics.setColorMode("modulate")
 	end
 	
-	love.graphics.draw(image, x, y, 0, self.direction, 1, 16, 32)
+	--scaling factor from size 64 to size 24: 0.375
+	love.graphics.draw(image, x, y, 0, self.direction*0.375, 1*0.375, 16, 32)
 	
 	if(self.currentLight~=nil)
 	then

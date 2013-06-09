@@ -68,13 +68,13 @@ function Level.new(name, spawningEnabled)
 			local entity = xml.level.entities:children()[index]
 			
 			if entity["@type"] == "checkpoint" then 
-				self.entities[index] = Checkpoint(self, { x = entity["@x"], y = entity["@y"]}, 32)
+				self.entities[index] = Checkpoint(self, { x = entity["@x"], y = entity["@y"]}, 12)
 			elseif entity["@type"] == "battery" then
-				self.entities[index] = Battery(self, { x = entity["@x"], y = entity["@y"]}, 32)
+				self.entities[index] = Battery(self, { x = entity["@x"], y = entity["@y"]}, 12)
 			elseif entity["@type"] == "enemy" then
-				self.entities[index] = Enemy(self, { x = entity["@x"], y = entity["@y"]}, 0.2, 32)
+				self.entities[index] = Enemy(self, { x = entity["@x"], y = entity["@y"]}, 0.2, 12)
 			elseif entity["@type"] == "collectable" then
-				self.entities[index] = Collectable(self, { x = entity["@x"], y = entity["@y"]}, 32)
+				self.entities[index] = Collectable(self, { x = entity["@x"], y = entity["@y"]}, 12)
 			end
 			
 		end
@@ -83,7 +83,7 @@ function Level.new(name, spawningEnabled)
 	--extract map
 	self.spawn = { x = xml.level.map["@spawnX"], y = xml.level.map["@spawnY"]}
 	
-	self.character = Character(self, self.spawn, true, 0.2, 32)
+	self.character = Character(self, self.spawn, true, 0.2, 12)
 	
 	self.map = Map()
 
@@ -186,9 +186,9 @@ function Level:backToCheckpoint()
 			newLevel.character.fixture:getBody():setPosition(entity["@x"], entity["@y"])
 			newLevel.character:setLight(false)
 		elseif entity["@type"] == "enemy" then
-			newLevel.entities[#newLevel.entities+1] = Enemy(newLevel, { x = entity["@x"], y = entity["@y"]}, 0.2, 32)
+			newLevel.entities[#newLevel.entities+1] = Enemy(newLevel, { x = entity["@x"], y = entity["@y"]}, 0.2, 12)
 		elseif entity["@type"] == "collectable" then
-			newLevel.entities[#newLevel.entities+1] = Collectable(newLevel, { x = entity["@x"], y = entity["@y"]}, 32)
+			newLevel.entities[#newLevel.entities+1] = Collectable(newLevel, { x = entity["@x"], y = entity["@y"]}, 12)
 		end
 		
     end
@@ -224,7 +224,7 @@ end
 function Level:draw()
 	--first draw map
 	self.map:draw()
-	
+
 	--now draw entities
 	for ent = 1, #self.entities do
 		self.entities[ent]:draw()

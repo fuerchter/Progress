@@ -1,0 +1,39 @@
+<level>
+	<info>
+		<title>Test</title>
+		<description>Just for testing</description>
+		<author>Adrian Wagner</author>
+	</info>
+
+	<config>
+		<music file="test.mp3" />
+		<colorscheme>
+			<colorLight r="0" g="255" b="0" a="255" />
+			<colorDark r="0" g="0" b="0" a="255" />
+			<colorBack r="122" g="122" b="122" a="255" />
+		</colorscheme>
+	</config>
+	
+	<entities>
+		<entity type="checkpoint" x="400" y="264" />
+		<entity type="enemy" x="400" y="312" />
+		<entity type="collectable" x="766" y="312" />
+	</entities>
+	
+	<map spawnX="36" spawnY="264">
+		<text x="315" y="240">Pressing R resets the level</text>
+		<text x="130" y="350">Enemy: Colliding with it as the shadow character will make you go back to the checkpoint</text>
+		<polygon type="dark" x="0" y="276" >
+			<vertex x="0" y="0" />
+			<vertex x="800" y="0" />
+			<vertex x="800" y="24" />
+			<vertex x="0" y="24" />
+		</polygon>
+		<polygon type="light" x="0" y="324" >
+			<vertex x="0" y="0" />
+			<vertex x="800" y="0" />
+			<vertex x="800" y="24" />
+			<vertex x="0" y="24" />
+		</polygon>
+	</map>
+</level>

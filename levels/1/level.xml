@@ -1,0 +1,40 @@
+<level>
+	<info>
+		<title>Test</title>
+		<description>Just for testing</description>
+		<author>Adrian Wagner</author>
+	</info>
+
+	<config>
+		<music file="test.mp3" />
+		<colorscheme>
+			<colorLight r="0" g="255" b="0" a="255" />
+			<colorDark r="0" g="0" b="0" a="255" />
+			<colorBack r="122" g="122" b="122" a="255" />
+		</colorscheme>
+	</config>
+	
+	<entities>
+		<entity type="checkpoint" x="400" y="276" />
+		<entity type="collectable" x="766" y="300" />
+	</entities>
+	
+	<map spawnX="36" spawnY="288">
+		<text x="0" y="324">Move: Press up, left and right</text>
+		<text x="275" y="252">Checkpoint: converts you to a shadow</text>
+		<text x="220" y="338">Light characters collide with shadow platforms (and vice versa)</text>
+		<text x="600" y="324">Gather these as shadow to win</text>
+		<polygon type="dark" x="0" y="288" >
+			<vertex x="0" y="0" />
+			<vertex x="800" y="0" />
+			<vertex x="800" y="24" />
+			<vertex x="0" y="24" />
+		</polygon>
+		<polygon type="light" x="0" y="312" >
+			<vertex x="0" y="0" />
+			<vertex x="800" y="0" />
+			<vertex x="800" y="24" />
+			<vertex x="0" y="24" />
+		</polygon>
+	</map>
+</level>

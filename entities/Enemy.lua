@@ -25,12 +25,12 @@ function Enemy:_init(level, position, friction, radius)
 	self.fixture:setFilterData(4, 7, 0)
 	
 	self.facingRight=true
-	self.leftFoot=Sensor(level, {x=-radius-10, y=radius}, 10, 10, self)
-	self.rightFoot=Sensor(level, {x=radius+10, y=radius}, 10, 10, self)
+	self.leftFoot=Sensor(level, {x=-radius-10, y=radius}, 5, 5, self)
+	self.rightFoot=Sensor(level, {x=radius+10, y=radius}, 5, 5, self)
 	self.leftFoot.fixture:setFilterData(4, 7, 0)
 	self.rightFoot.fixture:setFilterData(4, 7, 0)
 	
-	self.speed=120
+	self.speed=15
 	self.segments=20
 	return self
 end

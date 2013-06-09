@@ -26,9 +26,16 @@ function Sensor:_init(level, offset, width, height, parent)
 	self.offset=offset
 	self.parent=parent
 	self.collisionCount=0
-	self.fixture:setFilterData(4, 4, 0)
 	
 	return self
+end
+
+function Sensor:setLight(light)
+	if light then
+		self.fixture:setFilterData(0, 0, 1)
+	else
+		self.fixture:setFilterData(0, 0, 2)
+	end
 end
 
 function Sensor.update(self, dt)

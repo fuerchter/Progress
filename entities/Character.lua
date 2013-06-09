@@ -77,6 +77,9 @@ function Character:update(dt)
 end
 
 function Character:setLight(light)
+	
+	self.foot:setLight(light)
+	
 	self.light=light
 	if(light)
 	then

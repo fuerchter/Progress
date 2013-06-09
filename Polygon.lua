@@ -20,10 +20,10 @@ function Polygon.new(level, position, light, friction, points)
 	self.light=light
 	if(light)
 	then
-		self.fixture:setFilterData(4, 4, 2)
+		self.fixture:setFilterData(0, 0, 2)
 		self.color=level:getColorForType("light")
 	else
-		self.fixture:setFilterData(4, 4, 1)
+		self.fixture:setFilterData(0, 0, 1)
 		self.color=level:getColorForType("dark")
 	end
 	

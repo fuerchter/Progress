@@ -27,6 +27,16 @@ end
 function love.update(dt)
 	level:update(dt)
 	
+	local x,y = level.character.fixture:getBody():getPosition()
+	
+	if y > 600 then
+		if level.character.light then
+			level = level:fullReset()
+		else
+			level = level:backToCheckpoint()
+		end
+	end
+	
 	if(level:entityTypeCount("Collectable")==0 and progress<levelCount)
 	then
 		progress=progress+1

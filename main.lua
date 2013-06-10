@@ -14,6 +14,8 @@ local level
 local progress=1
 local levelCount=10
 local saveFile
+local resetTimer=0
+local maxReset=1
 
 function love.load()
 	--initialise graphics
@@ -69,8 +71,10 @@ function love.update(dt)
 		saveFile:close()
 	end
 	
-	if love.keyboard.isDown("r") then
+	resetTimer=resetTimer+dt
+	if(resetTimer>maxReset and love.keyboard.isDown("r")) then
 		level = level:fullReset()
+		resetTimer=0
 	end
 end
 
